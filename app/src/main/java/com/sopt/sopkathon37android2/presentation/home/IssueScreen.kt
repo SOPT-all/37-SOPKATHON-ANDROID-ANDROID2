@@ -43,28 +43,30 @@ fun IssueScreen(
         item {
             Spacer(modifier = Modifier.height(17.dp))
             HomeBanner(
-                bannerImage = R.drawable.img_issue_banner, // 실제 배너 이미지 리소스
+                bannerImage = R.drawable.img_issue_banner,
                 modifier = Modifier.padding()
             )
         }
 
-        // 2. 인기 안건 섹션
+        // 2. 인기 안건 섹션 - API 데이터 사용
         item {
             Column(
                 modifier = Modifier.padding(),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                HomeVoteCard(
-                    tag = "전체",
-                    tagType = TagType.ALL,
-                    dDay = "D-1",
-                    title = "F동 건물에 엘리베이터 설치 해주세요",
-                    author = "컴퓨터공학과 학생회장",
-                    currentCount = 25,
-                    maxCount = 50,
-                    progressText = "투표 가능까지 1명 남았어요",
-                    onItemClick = onBoomUpCardClick
-                )
+                uiState.bestIssue?.let { bestIssue ->
+                    HomeVoteCard(
+                        tag = bestIssue.tag,
+                        tagType = bestIssue.tagType,
+                        dDay = bestIssue.dDay,
+                        title = bestIssue.title,
+                        author = bestIssue.author,
+                        currentCount = bestIssue.currentCount,
+                        maxCount = bestIssue.maxCount,
+                        progressText = bestIssue.progressText,
+                        onItemClick = onBoomUpCardClick
+                    )
+                }
             }
 
             Spacer(modifier = Modifier.height(28.dp))

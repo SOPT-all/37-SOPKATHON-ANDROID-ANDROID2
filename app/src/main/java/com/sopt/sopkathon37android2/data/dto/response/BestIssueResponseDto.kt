@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class BestIssueResponseDto(
+    val issueId: Int,
     val title: String,
     val college: String,
     val range: String,

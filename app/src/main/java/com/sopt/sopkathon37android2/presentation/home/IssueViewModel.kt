@@ -26,6 +26,46 @@ class IssueViewModel @Inject constructor(
 
     init {
         loadIssues()
+        loadBestIssue() // 베스트 이슈도 로드
+    }
+    private fun loadBestIssue() {
+        viewModelScope.launch {
+            try {
+                Log.d(TAG, "베스트 이슈 API 호출")
+
+                val response = issueService.getBestIssue()
+
+                Log.d(TAG, "베스트 이슈 API 응답 - status: ${response.status}")
+
+                if (response.status == 200 && response.data != null) {
+                    val bestIssue = response.data.let { issue ->
+                        BestIssueItem(
+                            tag = issue.range,
+                            tagType = when (issue.range) {
+                                "전체" -> TagType.ALL
+                                "단과대학" -> TagType.MY
+                                "학과" -> TagType.OTHER
+                                else -> TagType.ALL
+                            },
+                            dDay = "D-${issue.remainedDay}",
+                            title = issue.title,
+                            author = "${issue.department} 학생회",
+                            currentCount = 25, // API에 없어서 임시값
+                            maxCount = 50,     // API에 없어서 임시값
+                            progressText = "투표 가능까지 1명 남았어요" // 임시값
+                        )
+                    }
+
+                    _uiState.update {
+                        it.copy(bestIssue = bestIssue)
+                    }
+
+                    Log.d(TAG, "베스트 이슈 UI 업데이트 완료")
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "베스트 이슈 로드 에러", e)
+            }
+        }
     }
 
     private fun loadIssues() {
