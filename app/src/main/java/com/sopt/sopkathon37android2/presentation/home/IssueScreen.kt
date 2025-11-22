@@ -80,7 +80,7 @@ fun IssueScreen(
                     author = "컴퓨터공학과 학생회장",
                     currentCount = 25,
                     maxCount = 50,
-                    progressText = "투표 가능까onBoomUpCardClick지 1명 남았어요",
+                    progressText = "투표 가능까지 1명 남았어요",
                     onItemClick = {  }
                 )
             }

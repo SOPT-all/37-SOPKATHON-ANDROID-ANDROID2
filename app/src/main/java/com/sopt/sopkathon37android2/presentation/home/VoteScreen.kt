@@ -47,6 +47,8 @@ fun VoteScreen(
                 title = vote.title,
                 onVoteClick = onVoteClick
             )
+
+            Spacer(modifier = Modifier.height(84.dp))
         }
 
         item{
