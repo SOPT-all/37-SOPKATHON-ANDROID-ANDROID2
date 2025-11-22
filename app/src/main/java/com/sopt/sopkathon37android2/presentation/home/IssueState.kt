@@ -9,7 +9,7 @@ data class IssueState(
 )
 
 data class IssueItem(
-    val id: String,
+    val id: Long,
     val tag: String,
     val tagType: TagType,
     val dDay: String,

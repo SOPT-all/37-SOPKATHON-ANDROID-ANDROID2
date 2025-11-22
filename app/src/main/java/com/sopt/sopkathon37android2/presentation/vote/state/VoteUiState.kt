@@ -5,7 +5,10 @@ data class VoteUiState(
     val stage: String = "",
     val writer: String = "",
     val content: String = "",
-    val imgList: List<String>? = null,
-    val isVotingOpen: Boolean = true,
-    val ratio: Float? = 0f,
+    val imgList: List<String>? = listOf(),
+    val isVoted: Boolean = true,
+    val isAgreed: Boolean? = false,
+    val maxVoter: Int = 100,
+    val agreeVoter: Int = 30,
+    val disagreeVoter: Int = 70,
 )

@@ -3,7 +3,6 @@ package com.sopt.sopkathon37android2.presentation.home
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
@@ -23,8 +22,6 @@ fun VoteScreen(
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
-            .padding(horizontal = 16.dp)
-            .padding(bottom = 84.dp)
     ) {
         item {
             Spacer(modifier = Modifier.height(12.dp))
@@ -43,14 +40,18 @@ fun VoteScreen(
             Spacer(modifier = Modifier.height(12.dp))
 
             HomeVote(
-                detailGroupTag = vote.detailGroupTag,
-                tagType = vote.tagType,
-                studentCouncil = vote.studentCouncil,
-                voteTotalNumber = vote.voteTotalNumber,
-                detailTitle = vote.detailTitle,
-                detailGroup = vote.detailGroup,
+                range = vote.range,
+                department = vote.department,
+                isCouncil = vote.isCouncil,
+                votedCount = vote.votedCount,
+                title = vote.title,
                 onVoteClick = onVoteClick
             )
         }
+
+        item{
+            Spacer(modifier = Modifier.height(84.dp))
+        }
+
     }
 }
