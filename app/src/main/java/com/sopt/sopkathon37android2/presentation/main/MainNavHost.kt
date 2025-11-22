@@ -9,7 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.navOptions
 import com.sopt.sopkathon37android2.presentation.a.navigation.aGraph
 import com.sopt.sopkathon37android2.presentation.b.navigation.bGraph
-import com.sopt.sopkathon37android2.presentation.c.navigation.cGraph
+import com.sopt.sopkathon37android2.presentation.register.navigation.cGraph
 import com.sopt.sopkathon37android2.presentation.d.navigation.dGraph
 
 @Composable
