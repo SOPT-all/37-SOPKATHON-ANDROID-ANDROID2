@@ -1,6 +1,7 @@
 package com.sopt.sopkathon37android2.data.di
 
 import com.sopt.sopkathon37android2.data.service.DummyService
+import com.sopt.sopkathon37android2.data.service.IssueScreenService
 import com.sopt.sopkathon37android2.data.service.VoteService
 import dagger.Module
 import dagger.Provides
@@ -20,4 +21,9 @@ object ServiceModule {
     @Provides
     @Singleton
     fun getVoteListsService(retrofit: Retrofit): VoteService = retrofit.create(VoteService::class.java)
+    // IssueService
+    @Provides
+    @Singleton
+    fun provideIssueService(retrofit: Retrofit): IssueScreenService =
+        retrofit.create(IssueScreenService::class.java)
 }
