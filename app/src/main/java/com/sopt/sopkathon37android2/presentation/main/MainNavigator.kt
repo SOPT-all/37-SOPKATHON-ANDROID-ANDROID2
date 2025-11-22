@@ -13,7 +13,7 @@ import com.sopt.sopkathon37android2.presentation.d.navigation.navigateToD
 import com.sopt.sopkathon37android2.presentation.splash.navigation.Splash
 
 class MainNavigator(
-    val navController: NavController
+    val navController: NavHostController
 ) {
     val startDestination = Splash
 

@@ -37,26 +37,24 @@ fun MainNavHost(
         popExitTransition = { ExitTransition.None },
         startDestination = navigator.startDestination,
         modifier = modifier,
-        builder = {
-            aGraph(
-                paddingValues = paddingValues,
-                onNavigateToB = {navigator.navigateToB(keepStackNavOptions)}
-            )
+    ){
+        aGraph(
+            paddingValues = paddingValues,
+            onNavigateToB = {navigator.navigateToB(keepStackNavOptions)}
+        )
 
-            bGraph(
-                paddingValues = paddingValues,
-                onNavigateToC = {navigator.navigateToC(keepStackNavOptions)}
-            )
+        bGraph(
+            paddingValues = paddingValues,
+            onNavigateToC = {navigator.navigateToC(keepStackNavOptions)}
+        )
 
-            cGraph(
-                paddingValues = paddingValues,
-                onNavigateToD = {navigator.navigateToD(keepStackNavOptions)}
-            )
+        cGraph(
+            paddingValues = paddingValues,
+            onNavigateToD = {navigator.navigateToD(keepStackNavOptions)}
+        )
 
-            dGraph(
-                paddingValues = paddingValues
-            )
-        }
-
-    )
+        dGraph(
+            paddingValues = paddingValues
+        )
+    }
 }
