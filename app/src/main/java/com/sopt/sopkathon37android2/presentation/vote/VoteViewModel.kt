@@ -1,5 +1,6 @@
 package com.sopt.sopkathon37android2.presentation.vote
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.sopkathon37android2.data.dto.request.VoteRequestDto
@@ -66,7 +67,8 @@ class VoteViewModel @Inject constructor(
                         maxVoter = (data.agreeCount ?: 0) + (data.disagreeCount ?: 0),
                     )
                 }
-            }.onFailure {
+            }.onFailure { e->
+                Log.e("TAG", "getVote: $e", )
                 // 에러 처리 (필요시 로깅 또는 에러 상태 업데이트)
             }
         }
