@@ -1,4 +1,4 @@
-package com.sopt.sopkathon37android2.presentation.c
+package com.sopt.sopkathon37android2.presentation.register
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -7,22 +7,25 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 
 @Composable
-fun CRoute(
+fun RegisterRoute(
     paddingValues: PaddingValues,
-    onNavigateToD: () -> Unit,
+    onNavigateToHome: () -> Unit,
+    viewModel: RegisterViewModel = hiltViewModel(),
 ) {
-    CScreen(
+
+    RegisterScreen(
         paddingValues = paddingValues,
-        onNavigateToD = onNavigateToD,
+        onNavigateToHome = onNavigateToHome,
     )
 }
 
 @Composable
-private fun CScreen(
+private fun RegisterScreen(
     paddingValues: PaddingValues,
-    onNavigateToD: () -> Unit,
+    onNavigateToHome: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -32,7 +35,7 @@ private fun CScreen(
     ) {
         Text(
             text = "C",
-            modifier = Modifier.clickable(onClick = onNavigateToD),
+            modifier = Modifier.clickable(onClick = onNavigateToHome),
         )
     }
 }

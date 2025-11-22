@@ -1,5 +1,6 @@
 package com.sopt.sopkathon37android2.presentation.vote
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -28,13 +29,15 @@ import com.sopt.sopkathon37android2.presentation.vote.state.VoteUiState
 
 @Composable
 fun VoteRoute(
+    paddingValues: PaddingValues,
+    onNavigateToHome: () -> Unit,
     viewModel: VoteViewModel = hiltViewModel(),
-    paddingValues: PaddingValues
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     VoteScreen(
         uiState = uiState,
+        onClick = onNavigateToHome,
         paddingValues = paddingValues,
     )
 }
@@ -43,6 +46,7 @@ fun VoteRoute(
 private fun VoteScreen(
     uiState: VoteUiState,
     paddingValues: PaddingValues,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
     onClickVote: () -> Unit = {},
 ) {
@@ -86,6 +90,10 @@ private fun VoteScreen(
                     contentDescription = null
                 )
             }
+            Text(
+                text = "ㅇㅇㅇㅇ",
+                modifier = Modifier.clickable(onClick = onClick)
+            )
             if (uiState.isVotingOpen) {
                 Row {
                     VoteButton(
@@ -124,6 +132,7 @@ private fun VoteScreen(
 private fun VoteScreenPreview() {
     VoteScreen(
         uiState = VoteUiState(),
+        onClick = {},
         paddingValues = PaddingValues()
     )
 }
