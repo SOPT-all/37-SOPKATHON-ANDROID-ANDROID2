@@ -23,8 +23,6 @@ fun VoteScreen(
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
-            .padding(horizontal = 16.dp)
-            .padding(bottom = 84.dp)
     ) {
         item {
             Spacer(modifier = Modifier.height(12.dp))
@@ -51,6 +49,8 @@ fun VoteScreen(
                 detailGroup = vote.detailGroup,
                 onVoteClick = onVoteClick
             )
+
+            Spacer(modifier = Modifier.height(84.dp))
         }
     }
 }
