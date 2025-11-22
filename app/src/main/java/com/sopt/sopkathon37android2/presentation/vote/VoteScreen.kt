@@ -49,6 +49,8 @@ fun VoteRoute(
     VoteScreen(
         uiState = uiState,
         onClick = onNavigateToHome,
+        voteAgree = viewModel::voteAgree,
+        voteDisagree = viewModel::voteDisagree,
         paddingValues = paddingValues,
     )
 }
@@ -58,6 +60,8 @@ private fun VoteScreen(
     uiState: VoteUiState,
     paddingValues: PaddingValues,
     onClick: () -> Unit,
+    voteAgree: () -> Unit,
+    voteDisagree: () -> Unit,
     modifier: Modifier = Modifier,
     onClickVote: () -> Unit = {},
 ) {
@@ -140,7 +144,7 @@ private fun VoteScreen(
                 }
 
             }
-            if (uiState.isVoted.not()) {
+            if (uiState.isVoted) {
                 Spacer(modifier = Modifier.height(86.dp))
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -148,10 +152,10 @@ private fun VoteScreen(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     VoteAgreeButton(
-                        onClick = {}
+                        onClick = {voteAgree()}
                     )
                     VoteDisagreeButton(
-                        onClick = {}
+                        onClick = {voteDisagree()}
                     )
                 }
                 Spacer(modifier = Modifier.height(12.dp))
@@ -196,7 +200,7 @@ private fun VoteScreen(
         )
     }
 }
-
+/*
 @Composable
 @Preview(showBackground = true)
 private fun VoteScreenPreview() {
@@ -208,3 +212,4 @@ private fun VoteScreenPreview() {
         paddingValues = PaddingValues()
     )
 }
+*/
