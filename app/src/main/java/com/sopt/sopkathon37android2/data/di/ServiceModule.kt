@@ -1,6 +1,7 @@
 package com.sopt.sopkathon37android2.data.di
 
 import com.sopt.sopkathon37android2.data.service.DummyService
+import com.sopt.sopkathon37android2.data.service.IssueScreenService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,5 +15,12 @@ object ServiceModule {
     // DummyService
     @Provides
     @Singleton
-    fun provideDummyService(retrofit: Retrofit): DummyService = retrofit.create(DummyService::class.java)
+    fun provideDummyService(retrofit: Retrofit): DummyService =
+        retrofit.create(DummyService::class.java)
+
+    // IssueService
+    @Provides
+    @Singleton
+    fun provideIssueService(retrofit: Retrofit): IssueScreenService =
+        retrofit.create(IssueScreenService::class.java)
 }
