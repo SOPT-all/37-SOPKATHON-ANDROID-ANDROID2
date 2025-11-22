@@ -3,7 +3,6 @@ package com.sopt.sopkathon37android2.presentation.home.component
 import HomeIssueCard
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -26,7 +25,6 @@ import com.sopt.sopkathon37android2.presentation.home.IssueItem
 @Composable
 fun IssueScreen(
     uiState: HomeState,
-    onBannerClick: () -> Unit = {},
     onBoomUpCardClick: () -> Unit = {},
     onIssueCardClick: (String) -> Unit = {},
     onBoomUpClick: (String) -> Unit = {},
@@ -35,6 +33,7 @@ fun IssueScreen(
     onFloatingButtonClick: () -> Unit = {}
 ) {
     Scaffold(
+        containerColor = SopkathonTheme.colors.gray01,
         floatingActionButton = {
             HomeFloatingButton(onClick = onFloatingButtonClick)
         },
@@ -73,7 +72,7 @@ fun IssueScreen(
                         title = "F동 건물에 엘리베이터 설치 해주세요",
                         author = "컴퓨터공학과 학생회장",
                         currentCount = 25,
-                        maxCount = 30,
+                        maxCount = 50,
                         progressText = "투표 가능까지 1명 남았어요",
                         onItemClick = onBoomUpCardClick
                     )
@@ -85,16 +84,26 @@ fun IssueScreen(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(),
+                        .padding(horizontal = 16.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    HomeToggle(
-                        isActivated = uiState.isActivated,
-                        onToggleClick = onToggleClick
-                    )
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        HomeToggle(
+                            isActivated = uiState.isActivated,
+                            onToggleClick = onToggleClick
+                        )
 
-                    // TODO: 정렬 드롭다운 추가
+                        Text(
+                            text = "타 단과대 제외",
+                            style = SopkathonTheme.typography.body.m_14,
+                            color = SopkathonTheme.colors.gray05,
+                            modifier = Modifier.padding(start = 8.dp)
+                        )
+                    }
+
                     Text(
                         text = "추천순 ▼",
                         style = SopkathonTheme.typography.body.m_14,
@@ -103,15 +112,6 @@ fun IssueScreen(
                 }
             }
 
-            // 4. 전체 안건 목록
-            item {
-                Text(
-                    text = "전체 안건",
-                    style = SopkathonTheme.typography.title.sb_16,
-                    color = SopkathonTheme.colors.gray05,
-                    modifier = Modifier.padding()
-                )
-            }
 
             items(uiState.issueList) { issue ->
                 HomeIssueCard(

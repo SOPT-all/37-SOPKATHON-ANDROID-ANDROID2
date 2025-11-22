@@ -17,6 +17,8 @@ enum class TagType { ALL, MY, OTHER }
 @Composable
 fun HomeTagChip(
     text: String,
+    modifier: Modifier = Modifier,
+    type: TagType = TagType.OTHER,
 ) {
     val backgroundColor = when (type) {
         TagType.ALL -> SopkathonTheme.colors.tagAll
@@ -30,6 +32,7 @@ fun HomeTagChip(
         text = text,
         style = SopkathonTheme.typography.caption.m_10,
         color = textColor,
+        modifier = modifier
             .clip(RoundedCornerShape(99.dp))
             .background(backgroundColor)
             .padding(horizontal = 8.dp, vertical = 3.dp)
@@ -39,6 +42,7 @@ fun HomeTagChip(
 
 @Preview(showBackground = true)
 @Composable
+private fun HomeTagChipPreview() {
     Column()
     {
         HomeTagChip(text = "전체", type = TagType.ALL)
