@@ -1,6 +1,7 @@
 package com.sopt.sopkathon37android2.presentation.vote
 
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -9,20 +10,29 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
-import com.sopt.sopkathon37android2.presentation.vote.component.VoteButton
+import com.sopt.sopkathon37android2.core.designsystem.ui.theme.SopkathonTheme
+import com.sopt.sopkathon37android2.presentation.vote.component.VoteAgreeButton
 import com.sopt.sopkathon37android2.presentation.vote.component.VoteDialog
+import com.sopt.sopkathon37android2.presentation.vote.component.VoteDisagreeButton
 import com.sopt.sopkathon37android2.presentation.vote.component.VoteResult
 import com.sopt.sopkathon37android2.presentation.vote.component.VoteStage
 import com.sopt.sopkathon37android2.presentation.vote.state.VoteUiState
@@ -53,66 +63,121 @@ private fun VoteScreen(
     val openDialog = remember {
         mutableStateOf(false)
     }
+
     Column(
         modifier =
             modifier
+                .background(
+                    color = SopkathonTheme.colors.gray01
+                )
                 .fillMaxSize()
                 .padding(paddingValues = paddingValues),
     ) {
         //탑 바 추가
         Column(
             modifier = Modifier
-                .padding(horizontal = 20.dp, vertical = 16.dp)
+                .padding(horizontal = 14.dp, vertical = 16.dp)
         ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
-                Text(text = uiState.title)
+                Text(
+                    text = uiState.title,
+                    color = SopkathonTheme.colors.black,
+                    style = SopkathonTheme.typography.title.sb_16
+                )
                 VoteStage()
                 Spacer(modifier = Modifier.weight(1f))
-                Text(text = uiState.writer)
+                Text(
+                    text = uiState.writer,
+                    color = SopkathonTheme.colors.gray04,
+                    style = SopkathonTheme.typography.body.m_14
+                )
             }
-            Spacer(modifier = Modifier.height(height = 20.dp))
+            Spacer(modifier = Modifier.height(height = 16.dp))
             LazyColumn(
                 modifier = Modifier
-                    .fillMaxSize()
+                    .background(
+                        color = SopkathonTheme.colors.white,
+                        shape = RoundedCornerShape(4.dp)
+                    )
+                    .padding(all = 16.dp)
+                    .fillMaxWidth()
+                    .weight(1f)
             ) {
                 item {
                     Text(
-                        text = uiState.content
+                        text = uiState.content,
+                        color = SopkathonTheme.colors.gray05,
+                        style = SopkathonTheme.typography.body.m_14,
                     )
                 }
             }
-            uiState.imgList?.forEach { imgUrl ->
-                AsyncImage(
-                    model = imgUrl,
-                    contentDescription = null
-                )
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .padding(top = 16.dp)
+                    .fillMaxWidth()
+            ) {
+                items(
+                    items = uiState.imgList ?: emptyList()
+                ) { imgUrl ->
+                    AsyncImage(
+                        model = imgUrl,
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(104.dp)
+                            .clip(RoundedCornerShape(4.dp))
+                    )
+                }
+
             }
-            Text(
-                text = "ㅇㅇㅇㅇ",
-                modifier = Modifier.clickable(onClick = onClick)
-            )
-            if (uiState.isVotingOpen) {
-                Row {
-                    VoteButton(
-                        text = "찬성",
+            if (uiState.isVoted.not()) {
+                Spacer(modifier = Modifier.height(86.dp))
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    VoteAgreeButton(
                         onClick = {}
                     )
-                    VoteButton(
-                        text = "반대",
+                    VoteDisagreeButton(
                         onClick = {}
                     )
                 }
+                Spacer(modifier = Modifier.height(12.dp))
             } else {
-                Column {
+                Spacer(modifier = Modifier.height(30.dp))
+                Column(
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ){
                     VoteResult(
-                        ratio = uiState.ratio ?: 0.5f
+                        maxVoter = uiState.maxVoter,
+                        currentVoter = if (uiState.isAgreed) uiState.agreeVoter else uiState.disagreeVoter,
+                        isAgreed = uiState.isAgreed
                     )
-                    Text(
-                        text = "이 투표 공유"
-                    )
+                    Spacer(modifier = Modifier.height(20.dp))
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                    ) {
+                        VoteAgreeButton(
+                            isEnabled = uiState.isAgreed
+                        )
+                        VoteDisagreeButton(
+                            isEnabled = uiState.isAgreed.not()
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(12.dp))
                 }
             }
         }
@@ -131,7 +196,9 @@ private fun VoteScreen(
 @Preview(showBackground = true)
 private fun VoteScreenPreview() {
     VoteScreen(
-        uiState = VoteUiState(),
+        uiState = VoteUiState(
+
+        ),
         onClick = {},
         paddingValues = PaddingValues()
     )
