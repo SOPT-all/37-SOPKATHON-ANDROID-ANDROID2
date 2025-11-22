@@ -49,7 +49,7 @@
 
 |<img src="https://avatars.githubusercontent.com/u/144779368?v=4" width="128" />|<img src="https://avatars.githubusercontent.com/u/107687577?v=4" width="128" />|<img src="https://avatars.githubusercontent.com/u/65026631?v=4" width="128" />|<img src="https://avatars.githubusercontent.com/u/132898771?v=4" width="128" />| 
 |:---------:|:---------:|:---------:|:---------:|
-|[정소희](https://github.com/sohee6989)|[성규현](https://github.com/dmp100)|[신현철](https://github.com/ShinHyeongcheol)|[유수현](https://github.com/sssuhha)|
+|[정소희](https://github.com/sohee6989)|[성규현](https://github.com/dmp100)|[신형철](https://github.com/ShinHyeongcheol)|[유수현](https://github.com/sssuhha)|
 | `안건 추천하기-2` `기초 세팅` | `안건 추천하기-1` | `컬러, 폰트 세팅` `안건 투표하기` | `안건 등록하기` |
 
 <br>
@@ -62,6 +62,7 @@
 
 ## 😆 Before
 <img width="480" height="600" alt="스크린샷 2025-11-23 오전 12 41 41" src="https://github.com/user-attachments/assets/81c576a4-4354-4ebd-8023-c688529597ba" />
+<img width="480" height="600" alt="스크린샷 2025-11-23 오전 1 34 50" src="https://github.com/user-attachments/assets/4b1996be-390a-4c41-9f07-b3797efabe70" />
 
 
 
