@@ -4,10 +4,10 @@
     android:height="108dp"
     android:viewportWidth="1024"
     android:viewportHeight="1024">
-  <group android:scaleX="0.67"
-      android:scaleY="0.67"
-      android:translateX="168.96"
-      android:translateY="168.96">
+  <group android:scaleX="0.7"
+      android:scaleY="0.7"
+      android:translateX="153.6"
+      android:translateY="153.6">
     <group>
       <clip-path
           android:pathData="M0,0h1024v1024h-1024z"/>
