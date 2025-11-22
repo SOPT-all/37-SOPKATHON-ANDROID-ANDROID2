@@ -5,7 +5,7 @@ import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.rememberNavController
-import com.sopt.sopkathon37android2.presentation.c.navigation.navigateToRegister
+import com.sopt.sopkathon37android2.presentation.register.navigation.navigateToRegister
 import com.sopt.sopkathon37android2.presentation.home.navigation.Home
 import com.sopt.sopkathon37android2.presentation.home.navigation.navigateToHome
 import com.sopt.sopkathon37android2.presentation.vote.navigation.navigateToVote

@@ -1,4 +1,4 @@
-package com.sopt.sopkathon37android2.presentation.c.navigation
+package com.sopt.sopkathon37android2.presentation.register.navigation
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.navigation.NavController

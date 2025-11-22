@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.navOptions
-import com.sopt.sopkathon37android2.presentation.c.navigation.registerGraph
+import com.sopt.sopkathon37android2.presentation.register.navigation.registerGraph
 import com.sopt.sopkathon37android2.presentation.home.navigation.homeGraph
 import com.sopt.sopkathon37android2.presentation.vote.navigation.voteGraph
 
