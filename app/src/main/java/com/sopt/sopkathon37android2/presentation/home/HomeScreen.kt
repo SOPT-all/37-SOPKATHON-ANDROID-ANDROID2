@@ -1,24 +1,30 @@
 package com.sopt.sopkathon37android2.presentation.home
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.sopkathon37android2.R
+import com.sopt.sopkathon37android2.core.designsystem.ui.theme.SopkathonTheme
+import com.sopt.sopkathon37android2.presentation.home.component.HomeBanner
 import com.sopt.sopkathon37android2.presentation.home.component.HomeToggle
+import com.sopt.sopkathon37android2.presentation.home.component.HomeTopBar
+import com.sopt.sopkathon37android2.presentation.home.component.HomeVote
 import com.sopt.sopkathon37android2.presentation.home.model.HomeTab
+import com.sopt.sopkathon37android2.presentation.home.model.VoteUiModel
+import androidx.compose.foundation.lazy.items
 
 @Composable
 fun HomeRoute(
@@ -51,39 +57,20 @@ private fun HomeScreen(
     onToggleClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val textColor = if (uiState.isSelected) {
-        Color.Black
-    } else {
-        Color.White
-    }
-
-    val textStyle = if (uiState.isSelected) {
-
-    } else {
-
-    }
-
     Column(
         modifier = modifier
-                .fillMaxSize()
-                .padding(paddingValues = paddingValues),
+            .fillMaxSize()
+            .background(color = SopkathonTheme.colors.gray01)
+            .padding(paddingValues = paddingValues)
+            .padding(horizontal = 16.dp)
+            .padding(top = 16.dp),
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(6.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = HomeTab.ISSUE.tabTitle,
-                color = Color.Black,
-                modifier = Modifier.clickable(onClick = onAgendaClick),
-            )
-            Text(
-                text = HomeTab.VOTE.tabTitle,
-                color = Color.White,
-                modifier = Modifier.clickable(onClick = onVoteClick),
-            )
-        }
+        HomeTopBar(
+            isIssueSelected = uiState.isIssueSelected,
+            isVoteSelected = uiState.isVoteSelected,
+            onAgendaClick = onAgendaClick,
+            onVoteClick = onVoteClick
+        )
 
         when (uiState.selectedTab) {
             HomeTab.ISSUE -> {
@@ -96,7 +83,8 @@ private fun HomeScreen(
 
             HomeTab.VOTE -> {
                 VoteScreen(
-                    onClick = onVoteScreenClick
+                    voteList = uiState.voteList,
+                    onVoteClick = onVoteScreenClick
                 )
             }
         }
@@ -108,7 +96,7 @@ private fun IssueScreen(
     uiState: HomeState,
     onClick: () -> Unit,
     onToggleClick: () -> Unit
-){
+) {
     Column {
         Text(
             text = "zzz",
@@ -120,16 +108,46 @@ private fun IssueScreen(
             onToggleClick = onToggleClick
         )
     }
+
 }
 
 @Composable
 private fun VoteScreen(
-    onClick: () -> Unit
-){
-    Column {
-        Text(
-            text = "ㅇㅇㅇㅇㅇ",
-            modifier = Modifier.clickable(onClick = onClick)
-        )
+    voteList: List<VoteUiModel>,
+    onVoteClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    LazyColumn(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(horizontal = 16.dp)
+            .padding(bottom = 84.dp)
+    ) {
+        item {
+            Spacer(modifier = Modifier.height(12.dp))
+
+            HomeBanner(
+                bannerImage = R.drawable.img_vote_banner
+            )
+
+            Spacer(modifier = Modifier.height(7.dp))
+        }
+
+        items(
+            items = voteList,
+            key = { it.id }
+        ) { vote ->
+            Spacer(modifier = Modifier.height(12.dp))
+
+            HomeVote(
+                detailGroupTag = vote.detailGroupTag,
+                tagType = vote.tagType,
+                studentCouncil = vote.studentCouncil,
+                voteTotalNumber = vote.voteTotalNumber,
+                detailTitle = vote.detailTitle,
+                detailGroup = vote.detailGroup,
+                onVoteClick = onVoteClick
+            )
+        }
     }
 }
