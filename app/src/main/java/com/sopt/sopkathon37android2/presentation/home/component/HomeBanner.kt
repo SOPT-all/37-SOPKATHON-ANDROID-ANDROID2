@@ -11,6 +11,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -20,20 +21,17 @@ import com.example.sopkathon37android2.R
 
 @Composable
 fun HomeBanner() {
-    Card(
+
+    Image(
+        painter = painterResource(id = R.drawable.ex_issue_image),
+        contentDescription = null,
+        contentScale = ContentScale.Crop,
         modifier = Modifier
             .padding(16.dp)
             .fillMaxWidth()
-            .height(130.dp),
-        shape = RoundedCornerShape(8.dp)
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.ex_issue_image),
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize()
-        )
-    }
+            .height(130.dp)
+            .clip(RoundedCornerShape(8.dp)),
+    )
 }
 
 
