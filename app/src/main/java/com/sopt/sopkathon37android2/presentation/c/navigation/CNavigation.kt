@@ -7,7 +7,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.sopt.sopkathon37android2.core.navigation.Route
 import com.sopt.sopkathon37android2.presentation.c.CRoute
-import com.sopt.sopkathon37android2.presentation.d.navigation.DScreen
+import com.sopt.sopkathon37android2.presentation.vote.navigation.DScreen
 import kotlinx.serialization.Serializable
 
 fun NavController.navigateToC(navOptions: NavOptions? = null) {
