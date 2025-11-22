@@ -1,12 +1,11 @@
 package com.sopt.sopkathon37android2.presentation.register.component
 
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import com.sopt.sopkathon37android2.core.designsystem.ui.theme.SopkathonTheme
 
 @Composable
 fun TextFieldTitle(
@@ -15,9 +14,10 @@ fun TextFieldTitle(
 ) {
     Text(
         text = text,
-        color = Color.DarkGray,
+        style = SopkathonTheme.typography.body.m_14,
+        color = SopkathonTheme.colors.gray05,
         modifier = modifier
-            .padding(start = 4.dp, bottom = 4.dp)
+            .fillMaxWidth()
     )
 }
 
@@ -25,6 +25,6 @@ fun TextFieldTitle(
 @Composable
 private fun TextFieldTitlePreview() {
     TextFieldTitle(
-        text = "Text Field Title"
+        text = "제목"
     )
 }
