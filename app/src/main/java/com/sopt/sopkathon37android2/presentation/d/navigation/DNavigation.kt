@@ -9,16 +9,14 @@ import com.sopt.sopkathon37android2.core.navigation.Route
 import com.sopt.sopkathon37android2.presentation.d.DRoute
 import kotlinx.serialization.Serializable
 
-fun NavController.navigateToD(navOptions: NavOptions? = null){
+fun NavController.navigateToD(navOptions: NavOptions? = null) {
     navigate(DScreen, navOptions)
 }
 
-fun NavGraphBuilder.dGraph(
-    paddingValues: PaddingValues,
-){
+fun NavGraphBuilder.dGraph(paddingValues: PaddingValues) {
     composable<DScreen> {
         DRoute(
-            paddingValues = paddingValues
+            paddingValues = paddingValues,
         )
     }
 }

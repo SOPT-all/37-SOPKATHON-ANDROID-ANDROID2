@@ -16,18 +16,20 @@ import com.sopt.sopkathon37android2.presentation.d.navigation.dGraph
 fun MainNavHost(
     navigator: MainNavigator,
     paddingValues: PaddingValues,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
-    val clearStackNavOptions = navOptions {
-        popUpTo(0) { inclusive = true }
-        launchSingleTop = true
-        restoreState = false
-    }
+    val clearStackNavOptions =
+        navOptions {
+            popUpTo(0) { inclusive = true }
+            launchSingleTop = true
+            restoreState = false
+        }
 
-    val keepStackNavOptions = navOptions {
-        launchSingleTop = true
-        restoreState = true
-    }
+    val keepStackNavOptions =
+        navOptions {
+            launchSingleTop = true
+            restoreState = true
+        }
 
     NavHost(
         navController = navigator.navController,
@@ -37,24 +39,24 @@ fun MainNavHost(
         popExitTransition = { ExitTransition.None },
         startDestination = navigator.startDestination,
         modifier = modifier,
-    ){
+    ) {
         aGraph(
             paddingValues = paddingValues,
-            onNavigateToB = {navigator.navigateToB(keepStackNavOptions)}
+            onNavigateToB = { navigator.navigateToB(keepStackNavOptions) },
         )
 
         bGraph(
             paddingValues = paddingValues,
-            onNavigateToC = {navigator.navigateToC(keepStackNavOptions)}
+            onNavigateToC = { navigator.navigateToC(keepStackNavOptions) },
         )
 
         cGraph(
             paddingValues = paddingValues,
-            onNavigateToD = {navigator.navigateToD(keepStackNavOptions)}
+            onNavigateToD = { navigator.navigateToD(keepStackNavOptions) },
         )
 
         dGraph(
-            paddingValues = paddingValues
+            paddingValues = paddingValues,
         )
     }
 }

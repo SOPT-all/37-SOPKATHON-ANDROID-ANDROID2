@@ -7,13 +7,14 @@ import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
 @HiltAndroidApp
-class SoapkathonApplication: Application() {
+class SoapkathonApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
         initTimber()
         setNightMode()
     }
+
     private fun initTimber() {
         if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
     }

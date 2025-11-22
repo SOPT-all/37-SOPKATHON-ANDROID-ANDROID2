@@ -8,24 +8,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-fun SplashRoute(
-    paddingValues: PaddingValues
-){
+fun SplashRoute(paddingValues: PaddingValues) {
     SplashScreen(
-        paddingValues = paddingValues
+        paddingValues = paddingValues,
     )
 }
 
 @Composable
 private fun SplashScreen(
     paddingValues: PaddingValues,
-    modifier: Modifier = Modifier
-){
+    modifier: Modifier = Modifier,
+) {
     Column(
         modifier = modifier
-            .fillMaxSize()
-            .padding(paddingValues = paddingValues)
+                .fillMaxSize()
+                .padding(paddingValues = paddingValues),
     ) {
-
     }
 }

@@ -12,11 +12,11 @@ import androidx.compose.ui.Modifier
 @Composable
 fun BRoute(
     paddingValues: PaddingValues,
-    onNavigateToC: () -> Unit
+    onNavigateToC: () -> Unit,
 ) {
     BScreen(
         paddingValues = paddingValues,
-        onNavigateToC = onNavigateToC
+        onNavigateToC = onNavigateToC,
     )
 }
 
@@ -24,18 +24,19 @@ fun BRoute(
 private fun BScreen(
     paddingValues: PaddingValues,
     onNavigateToC: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(
-                paddingValues = paddingValues
-            )
+        modifier =
+            modifier
+                .fillMaxSize()
+                .padding(
+                    paddingValues = paddingValues,
+                ),
     ) {
         Text(
             text = "B",
-            modifier = Modifier.clickable(onClick = onNavigateToC)
+            modifier = Modifier.clickable(onClick = onNavigateToC),
         )
     }
 }

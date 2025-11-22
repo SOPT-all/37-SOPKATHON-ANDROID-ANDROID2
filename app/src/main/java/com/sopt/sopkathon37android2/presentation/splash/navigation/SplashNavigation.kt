@@ -10,14 +10,14 @@ import com.sopt.sopkathon37android2.core.navigation.Route
 import com.sopt.sopkathon37android2.presentation.splash.SplashRoute
 import kotlinx.serialization.Serializable
 
-fun NavController.navigateToSplash(navOptions: NavOptions? = null){
+fun NavController.navigateToSplash(navOptions: NavOptions? = null) {
     navigate(Splash, navOptions)
 }
 
 fun NavGraphBuilder.splashGraph(
     paddingValues: PaddingValues,
-    onNavigateToB: () -> Unit
-){
+    onNavigateToB: () -> Unit,
+) {
     composable<SplashScreen> {
         SplashRoute(
             paddingValues = paddingValues,
@@ -26,4 +26,4 @@ fun NavGraphBuilder.splashGraph(
 }
 
 @Serializable
-data object Splash: Route
+data object Splash : Route

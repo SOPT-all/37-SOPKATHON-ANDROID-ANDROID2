@@ -11,11 +11,11 @@ import androidx.compose.ui.Modifier
 @Composable
 fun CRoute(
     paddingValues: PaddingValues,
-    onNavigateToD: () -> Unit
-){
+    onNavigateToD: () -> Unit,
+) {
     CScreen(
         paddingValues = paddingValues,
-        onNavigateToD = onNavigateToD
+        onNavigateToD = onNavigateToD,
     )
 }
 
@@ -23,15 +23,16 @@ fun CRoute(
 private fun CScreen(
     paddingValues: PaddingValues,
     onNavigateToD: () -> Unit,
-    modifier: Modifier = Modifier
-){
+    modifier: Modifier = Modifier,
+) {
     Column(
-        modifier = modifier
-            .padding(paddingValues = paddingValues)
+        modifier =
+            modifier
+                .padding(paddingValues = paddingValues),
     ) {
         Text(
             text = "C",
-            modifier = Modifier.clickable(onClick = onNavigateToD)
+            modifier = Modifier.clickable(onClick = onNavigateToD),
         )
     }
 }

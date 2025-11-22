@@ -28,24 +28,27 @@ object NetworkModule {
     @Provides
     @Singleton
     fun providesOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
-        OkHttpClient.Builder()
+        OkHttpClient
+            .Builder()
             .addInterceptor(loggingInterceptor)
             .build()
 
     @OptIn(ExperimentalSerializationApi::class)
     @Provides
     @Singleton
-    fun providesConverterFactory(): Converter.Factory = Json.asConverterFactory(
-        "application/json".toMediaType()
-    )
+    fun providesConverterFactory(): Converter.Factory =
+        Json.asConverterFactory(
+            "application/json".toMediaType(),
+        )
 
     @Provides
     @Singleton
     fun providesRetrofit(
         client: OkHttpClient,
-        converterFactory: Converter.Factory
+        converterFactory: Converter.Factory,
     ): Retrofit =
-        Retrofit.Builder()
+        Retrofit
+            .Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .client(client)
             .addConverterFactory(converterFactory)

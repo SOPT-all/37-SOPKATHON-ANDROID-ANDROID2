@@ -1,8 +1,8 @@
 [versions]
 
 # Version
-compileSdk = "36"
-minSdk = "28"
+compileSdk = "35"
+minSdk = "27"
 targetSdk = "35"
 versionCode = "3"
 versionName = "1.0.2"

@@ -16,13 +16,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 fun ARoute(
     paddingValues: PaddingValues,
     onNavigateToB: () -> Unit,
-    viewModel: AViewModel = hiltViewModel()
+    viewModel: AViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     AScreen(
         paddingValues = paddingValues,
-        onNavigateToB = onNavigateToB
+        onNavigateToB = onNavigateToB,
     )
 }
 
@@ -30,16 +30,17 @@ fun ARoute(
 private fun AScreen(
     paddingValues: PaddingValues,
     onNavigateToB: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(paddingValues = paddingValues)
+        modifier =
+            modifier
+                .fillMaxSize()
+                .padding(paddingValues = paddingValues),
     ) {
         Text(
             text = "A",
-            modifier = Modifier.clickable(onClick = onNavigateToB)
+            modifier = Modifier.clickable(onClick = onNavigateToB),
         )
     }
 }

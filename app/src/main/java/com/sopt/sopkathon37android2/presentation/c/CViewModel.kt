@@ -7,7 +7,5 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CViewModel @Inject constructor(
-    private val dummyService: DummyService
-) : ViewModel() {
-
-}
+    private val dummyService: DummyService,
+) : ViewModel()

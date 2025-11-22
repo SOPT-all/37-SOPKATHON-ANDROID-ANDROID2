@@ -8,24 +8,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-fun DRoute(
-    paddingValues: PaddingValues
-){
+fun DRoute(paddingValues: PaddingValues) {
     DScreen(
-        paddingValues = paddingValues
+        paddingValues = paddingValues,
     )
 }
 
 @Composable
 private fun DScreen(
     paddingValues: PaddingValues,
-    modifier: Modifier = Modifier
-){
+    modifier: Modifier = Modifier,
+) {
     Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(paddingValues = paddingValues)
+        modifier =
+            modifier
+                .fillMaxSize()
+                .padding(paddingValues = paddingValues),
     ) {
-
     }
 }

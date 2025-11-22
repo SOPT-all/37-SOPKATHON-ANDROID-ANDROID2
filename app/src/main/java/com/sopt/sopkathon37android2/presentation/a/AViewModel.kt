@@ -12,21 +12,21 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AViewModel @Inject constructor(
-    private val dummyService: DummyService
+    private val dummyService: DummyService,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(AState())
     val uiState: StateFlow<AState> = _uiState.asStateFlow()
 
-    fun getDummy(){
+    fun getDummy() {
         viewModelScope.launch {
             runCatching {
                 dummyService.getDummies(uiState.value.userId)
             }.onSuccess {
-                _uiState.value = _uiState.value.copy(
-                    nickname = it.data.nickname
-                )
+                _uiState.value =
+                    _uiState.value.copy(
+                        nickname = it.data.nickname,
+                    )
             }.onFailure {
-
             }
         }
     }
