@@ -6,5 +6,5 @@ data class HomeState(
     val userId: Long = 0,
     val nickname: String = "",
     val isSelected: Boolean = false,
-    val selectedTab: HomeTab = HomeTab.AGENDA
+    val selectedTab: HomeTab = HomeTab.ISSUE
 )

@@ -1,4 +1,4 @@
-package com.sopt.sopkathon37android2.presentation.a.component
+package com.sopt.sopkathon37android2.presentation.home.component
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.LinearProgressIndicator
@@ -6,11 +6,10 @@ import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.google.android.material.progressindicator.LinearProgressIndicator
 
 
 @Composable
-fun AProgressBar(
+fun HomeProgressBar(
     currentCount: Int, // 현재 인원 카운트
     maxCount: Int,
 ) {
@@ -26,7 +25,7 @@ fun AProgressBar(
 
 @Preview(showBackground = true)
 @Composable
-fun AProgressBarPreview(){
-    AProgressBar(5,30)
+fun HomeProgressBarPreview() {
+    HomeProgressBar(5, 30)
 }
 
