@@ -1,4 +1,4 @@
-package com.sopt.sopkathon37android2.presentation.c
+package com.sopt.sopkathon37android2.presentation.register
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column

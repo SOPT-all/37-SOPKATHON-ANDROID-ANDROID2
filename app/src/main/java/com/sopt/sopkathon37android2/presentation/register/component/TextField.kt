@@ -1,4 +1,4 @@
-package com.sopt.sopkathon37android2.presentation.c.component
+package com.sopt.sopkathon37android2.presentation.register.component
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
@@ -24,10 +24,11 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun EnrollTextField(
+fun TextField(
     value: String,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
@@ -89,4 +90,14 @@ fun EnrollTextField(
             }
         )
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun TextFieldPreview() {
+    TextField(
+        value = "",
+        onValueChange = {},
+        placeholder = "텍스트를 입력해주세요."
+    )
 }
