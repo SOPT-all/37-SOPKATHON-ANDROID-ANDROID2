@@ -28,8 +28,15 @@ class VoteViewModel @Inject constructor(
         getVote(1, 1)
     }
 
+    fun setAgree(agree: Boolean){
+        _uiState.update {
+            it.copy(
+                isAgreed = agree
+            )
+        }
+    }
+
     fun voteAgree() {
-        Log.d("asd","?")
         vote(issueId, userId, isAgree = true)
     }
 
@@ -54,6 +61,7 @@ class VoteViewModel @Inject constructor(
                         content = data.description,
                         imgList = data.imageUrl,
                         isVoted = data.isVoted,
+                        isAgreed = data.isAgreed,
                         agreeVoter = data.agreeCount ?: 0,
                         disagreeVoter = data.disagreeCount ?: 0,
                         maxVoter = (data.agreeCount ?: 0) + (data.disagreeCount ?: 0),
@@ -67,9 +75,7 @@ class VoteViewModel @Inject constructor(
 
     fun vote(issueId: Long, userId: Long, isAgree: Boolean) {
         viewModelScope.launch {
-            Log.d("asd","?")
             runCatching {
-                Log.d("asd", "${userId}" )
                 voteService.vote(
                     userId = userId,
                     issueId = issueId,

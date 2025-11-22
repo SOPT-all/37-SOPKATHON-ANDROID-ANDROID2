@@ -31,6 +31,8 @@ data class VotedPageData(
     @SerialName("disagreeCount")
     val disagreeCount: Int? = null,
     @SerialName("isVoted")
-    val isVoted: Boolean
+    val isVoted: Boolean,
+    @SerialName("isAgreed")
+    val isAgreed: Boolean
 )
 

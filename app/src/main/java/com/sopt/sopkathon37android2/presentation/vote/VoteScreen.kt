@@ -19,6 +19,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -51,6 +52,7 @@ fun VoteRoute(
         onClick = onNavigateToHome,
         voteAgree = viewModel::voteAgree,
         voteDisagree = viewModel::voteDisagree,
+        setAgree = viewModel::setAgree,
         paddingValues = paddingValues,
     )
 }
@@ -60,14 +62,16 @@ private fun VoteScreen(
     uiState: VoteUiState,
     paddingValues: PaddingValues,
     onClick: () -> Unit,
+    setAgree: (Boolean) -> Unit,
     voteAgree: () -> Unit,
     voteDisagree: () -> Unit,
     modifier: Modifier = Modifier,
-    onClickVote: () -> Unit = {},
 ) {
     val openDialog = remember {
         mutableStateOf(false)
     }
+
+    var dialogState = remember { mutableStateOf(true) }
 
     Column(
         modifier =
@@ -152,10 +156,18 @@ private fun VoteScreen(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     VoteAgreeButton(
-                        onClick = {voteAgree()}
+                        onClick = {
+                            dialogState = mutableStateOf(true)
+                            setAgree(true)
+                            openDialog.value = true
+                        }
                     )
                     VoteDisagreeButton(
-                        onClick = {voteDisagree()}
+                        onClick = {
+                            dialogState = mutableStateOf(false)
+                            setAgree(false)
+                            openDialog.value = true
+                        }
                     )
                 }
                 Spacer(modifier = Modifier.height(12.dp))
@@ -169,7 +181,7 @@ private fun VoteScreen(
                 ){
                     VoteResult(
                         maxVoter = uiState.maxVoter,
-                        currentVoter = if (uiState.isAgreed) uiState.agreeVoter else uiState.disagreeVoter,
+                        currentVoter = if (uiState.isAgreed!!) uiState.agreeVoter else uiState.disagreeVoter,
                         isAgreed = uiState.isAgreed
                     )
                     Spacer(modifier = Modifier.height(20.dp))
@@ -193,10 +205,19 @@ private fun VoteScreen(
     }
     if (openDialog.value) {
         VoteDialog(
+            isAgreed = uiState.isAgreed!!,
             onDismiss = {
                 openDialog.value = false
             },
-            onConfirm = onClickVote,
+            onConfirm = {
+                if(dialogState.value){
+                    voteAgree()
+                    openDialog.value = false
+                }else{
+                    voteDisagree()
+                    openDialog.value = false
+                }
+            },
         )
     }
 }
