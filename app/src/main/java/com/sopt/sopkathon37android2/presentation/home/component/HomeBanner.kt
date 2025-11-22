@@ -27,7 +27,7 @@ fun HomeBanner() {
         contentDescription = null,
         contentScale = ContentScale.Crop,
         modifier = Modifier
-            .padding(16.dp)
+            .padding()
             .fillMaxWidth()
             .height(130.dp)
             .clip(RoundedCornerShape(8.dp)),
