@@ -135,9 +135,9 @@ private fun BoomUpButton(
         Image(
             painter = painterResource(
                 id = if (isFilled) {
-                    R.drawable.ic_home_boomup
-                } else {
                     R.drawable.ic_home_boomup_empty
+                } else {
+                    R.drawable.ic_home_boomup
                 }
             ),
             contentDescription = "추천",

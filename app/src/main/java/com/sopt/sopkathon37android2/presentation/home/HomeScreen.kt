@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sopt.sopkathon37android2.core.designsystem.ui.theme.SopkathonTheme
 import com.sopt.sopkathon37android2.presentation.home.component.HomeTopBar
 import com.sopt.sopkathon37android2.presentation.home.model.HomeTab
@@ -37,7 +38,14 @@ fun HomeRoute(
         onVoteClick = viewModel::onVoteClicked,
         onClick = onNavigateToRegister,
         onVoteScreenClick = onNavigateToVote,
-        onToggleClick = issueViewModel::onToggleClicked
+        onToggleClick = issueViewModel::onToggleClicked,
+        onBoomUpClick = { issueId ->
+            issueViewModel.postRecommend(issueId)
+        },
+        onIssueCardClick = { issueId ->
+            // 여기에 상세 페이지 이동 로직 작성하면 됨
+            println("카드 클릭됨! issueId = $issueId")
+        }
     )
 }
 
@@ -52,6 +60,8 @@ private fun HomeScreen(
     onClick: () -> Unit,
     onVoteScreenClick: () -> Unit,
     onToggleClick: () -> Unit,
+    onBoomUpClick: (Long) -> Unit,
+    onIssueCardClick: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -73,8 +83,9 @@ private fun HomeScreen(
             HomeTab.ISSUE -> {
                 IssueScreen(
                     uiState = uiIssueState,
-                    onClick = onClick,
-                    onToggleClick = onToggleClick
+                    onBoomUpClick = onBoomUpClick,
+                    onIssueCardClick = onIssueCardClick,
+                    onToggleClick = onToggleClick,
                 )
             }
 

@@ -45,7 +45,6 @@ class IssueViewModel @Inject constructor(
                 )
 
                 Log.d(TAG, "API 응답 - status: ${response.status}")
-
                 if (response.status == 200) {
                     val issueItems = response.data?.map { issue ->
                         IssueItem(
@@ -61,7 +60,7 @@ class IssueViewModel @Inject constructor(
                             title = issue.title,
                             author = "${issue.department} 학생회",
                             boomUpCount = issue.recommendCount.toString(),
-                            isBoomUpFilled = false
+                            isBoomUpFilled = issue.isBest
                         )
                     } ?: emptyList()
 
