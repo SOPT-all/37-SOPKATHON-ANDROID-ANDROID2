@@ -1,4 +1,4 @@
-package com.sopt.sopkathon37android2.presentation.b.navigation
+package com.sopt.sopkathon37android2.presentation.vote.navigation
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.navigation.NavController
@@ -6,24 +6,24 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.sopt.sopkathon37android2.core.navigation.Route
-import com.sopt.sopkathon37android2.presentation.b.BRoute
+import com.sopt.sopkathon37android2.presentation.vote.VoteRoute
 import kotlinx.serialization.Serializable
 
-fun NavController.navigateToB(navOptions: NavOptions? = null) {
-    navigate(BScreen, navOptions)
+fun NavController.navigateToVote(navOptions: NavOptions? = null) {
+    navigate(Vote, navOptions)
 }
 
-fun NavGraphBuilder.bGraph(
+fun NavGraphBuilder.voteGraph(
     paddingValues: PaddingValues,
-    onNavigateToC: () -> Unit,
+    onNavigateUp: () -> Unit
 ) {
-    composable<BScreen> {
-        BRoute(
+    composable<Vote> {
+        VoteRoute(
             paddingValues = paddingValues,
-            onNavigateToC = onNavigateToC,
+            onNavigateToHome = onNavigateUp
         )
     }
 }
 
 @Serializable
-data object BScreen : Route
+data object Vote : Route

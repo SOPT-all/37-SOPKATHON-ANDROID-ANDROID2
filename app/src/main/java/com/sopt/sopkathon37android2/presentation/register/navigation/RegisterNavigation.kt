@@ -6,25 +6,24 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.sopt.sopkathon37android2.core.navigation.Route
-import com.sopt.sopkathon37android2.presentation.c.CRoute
-import com.sopt.sopkathon37android2.presentation.vote.navigation.DScreen
+import com.sopt.sopkathon37android2.presentation.register.RegisterRoute
 import kotlinx.serialization.Serializable
 
-fun NavController.navigateToC(navOptions: NavOptions? = null) {
-    navigate(CScreen, navOptions)
+fun NavController.navigateToRegister(navOptions: NavOptions? = null) {
+    navigate(Register, navOptions)
 }
 
-fun NavGraphBuilder.cGraph(
+fun NavGraphBuilder.registerGraph(
     paddingValues: PaddingValues,
-    onNavigateToD: () -> Unit,
+    onNavigateUp: () -> Unit,
 ) {
-    composable<DScreen> {
-        CRoute(
+    composable<Register> {
+        RegisterRoute(
             paddingValues = paddingValues,
-            onNavigateToD = onNavigateToD,
+            onNavigateToHome = onNavigateUp,
         )
     }
 }
 
 @Serializable
-data object CScreen : Route
+data object Register : Route

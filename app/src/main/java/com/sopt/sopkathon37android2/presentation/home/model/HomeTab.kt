@@ -4,9 +4,9 @@ enum class HomeTab(
     val tabTitle: String,
 ){
     ISSUE(
-        tabTitle = "Home"
+        tabTitle = "안건"
     ),
     VOTE(
-        tabTitle = "Search"
+        tabTitle = "투표"
     )
 }

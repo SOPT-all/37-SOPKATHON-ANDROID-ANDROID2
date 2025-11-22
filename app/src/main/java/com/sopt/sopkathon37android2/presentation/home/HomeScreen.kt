@@ -22,7 +22,8 @@ import com.sopt.sopkathon37android2.presentation.home.model.HomeTab
 @Composable
 fun HomeRoute(
     paddingValues: PaddingValues,
-    onNavigateToB: () -> Unit,
+    onNavigateToRegister: () -> Unit,
+    onNavigateToVote: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -31,7 +32,9 @@ fun HomeRoute(
         uiState = uiState,
         paddingValues = paddingValues,
         onAgendaClick = viewModel::onAgendaClicked,
-        onVoteClick = viewModel::onVoteClicked
+        onVoteClick = viewModel::onVoteClicked,
+        onClick = onNavigateToRegister,
+        onVoteScreenClick = onNavigateToVote
     )
 }
 
@@ -41,6 +44,8 @@ private fun HomeScreen(
     paddingValues: PaddingValues,
     onAgendaClick: () -> Unit,
     onVoteClick: () -> Unit,
+    onClick: () -> Unit,
+    onVoteScreenClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val textColor = if (uiState.isSelected) {
@@ -67,32 +72,52 @@ private fun HomeScreen(
         ) {
             Text(
                 text = HomeTab.ISSUE.tabTitle,
+                color = Color.Black,
                 modifier = Modifier.clickable(onClick = onAgendaClick),
             )
             Text(
                 text = HomeTab.VOTE.tabTitle,
+                color = Color.White,
                 modifier = Modifier.clickable(onClick = onVoteClick),
             )
         }
 
         when (uiState.selectedTab) {
             HomeTab.ISSUE -> {
-                IssueScreen()
+                IssueScreen(
+                    onClick = onClick
+                )
             }
 
             HomeTab.VOTE -> {
-                VoteScreen()
+                VoteScreen(
+                    onClick = onVoteScreenClick
+                )
             }
         }
     }
 }
 
 @Composable
-private fun IssueScreen(){
-
+private fun IssueScreen(
+    onClick: () -> Unit
+){
+    Column {
+        Text(
+            text = "zzz",
+            modifier = Modifier.clickable(onClick = onClick)
+        )
+    }
 }
 
 @Composable
-private fun VoteScreen(){
-
+private fun VoteScreen(
+    onClick: () -> Unit
+){
+    Column {
+        Text(
+            text = "ㅇㅇㅇㅇㅇ",
+            modifier = Modifier.clickable(onClick = onClick)
+        )
+    }
 }

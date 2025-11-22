@@ -5,11 +5,10 @@ import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.rememberNavController
-import com.sopt.sopkathon37android2.presentation.b.navigation.navigateToB
-import com.sopt.sopkathon37android2.presentation.c.navigation.navigateToC
-import com.sopt.sopkathon37android2.presentation.d.navigation.navigateToD
+import com.sopt.sopkathon37android2.presentation.c.navigation.navigateToRegister
 import com.sopt.sopkathon37android2.presentation.home.navigation.Home
 import com.sopt.sopkathon37android2.presentation.home.navigation.navigateToHome
+import com.sopt.sopkathon37android2.presentation.vote.navigation.navigateToVote
 
 class MainNavigator(
     val navController: NavHostController,
@@ -20,16 +19,16 @@ class MainNavigator(
         navController.navigateToHome(navOptions)
     }
 
-    fun navigateToB(navOptions: NavOptions) {
-        navController.navigateToB(navOptions)
+    fun navigateToRegister(navOptions: NavOptions) {
+        navController.navigateToRegister(navOptions)
     }
 
-    fun navigateToC(navOptions: NavOptions) {
-        navController.navigateToC(navOptions)
+    fun navigateToVote(navOptions: NavOptions) {
+        navController.navigateToVote(navOptions)
     }
 
-    fun navigateToD(navOptions: NavOptions) {
-        navController.navigateToD(navOptions)
+    fun navigateUp() {
+        navController.navigateUp()
     }
 }
 
