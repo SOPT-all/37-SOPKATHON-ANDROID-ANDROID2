@@ -2,6 +2,7 @@ package com.sopt.sopkathon37android2.data.di
 
 import com.example.sopkathon37android2.BuildConfig
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.sopt.sopkathon37android2.data.service.RegisterService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -53,4 +54,9 @@ object NetworkModule {
             .client(client)
             .addConverterFactory(converterFactory)
             .build()
+
+    @Provides
+    @Singleton
+    fun provideRegisterService(retrofit: Retrofit): RegisterService =
+        retrofit.create(RegisterService::class.java)
 }

@@ -10,9 +10,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.sopt.sopkathon37android2.core.designsystem.ui.theme.SopkathonTheme
 import com.sopt.sopkathon37android2.core.util.noRippleClickable
 
 @Composable
@@ -25,15 +25,16 @@ fun RegisterButton(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(8.dp))
-            .background(if (enabled) Color.Black else Color.LightGray)
-            .noRippleClickable(enabled = enabled) { onClick() }
-            .padding(vertical = 16.dp),
+            .clip(RoundedCornerShape(99.dp))
+            .background(if (enabled) SopkathonTheme.colors.gray04 else SopkathonTheme.colors.gray02)
+            .noRippleClickable(onClick = onClick)
+            .padding(vertical = 17.dp),
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = text,
-            color = if (enabled) Color.White else Color.DarkGray
+            style = SopkathonTheme.typography.title.sb_14,
+            color = if (enabled) SopkathonTheme.colors.white else SopkathonTheme.colors.gray03
         )
     }
 }
@@ -42,8 +43,18 @@ fun RegisterButton(
 @Composable
 private fun RegisterButtonPreview() {
     RegisterButton(
-        text = "Enroll",
+        text = "안건 등록하기",
         enabled = true,
+        onClick = {}
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun RegisterButtonPreview2() {
+    RegisterButton(
+        text = "안건 등록하기",
+        enabled = false,
         onClick = {}
     )
 }

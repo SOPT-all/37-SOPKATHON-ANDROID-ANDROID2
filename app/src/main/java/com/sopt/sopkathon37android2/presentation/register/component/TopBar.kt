@@ -12,11 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.sopkathon37android2.R
+import com.sopt.sopkathon37android2.core.designsystem.ui.theme.SopkathonTheme
 import com.sopt.sopkathon37android2.core.util.noRippleClickable
 
 @Composable
@@ -28,7 +27,7 @@ fun TopBar(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(vertical = 12.dp, horizontal = 16.dp),
+            .padding(vertical = 10.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
@@ -37,13 +36,15 @@ fun TopBar(
             modifier = Modifier
                 .size(24.dp)
                 .noRippleClickable { onBackClick() }
+
         )
 
-        Spacer(modifier = Modifier.width(10.dp))
+        Spacer(modifier = Modifier.width(12.dp))
 
         Text(
             text = title,
-            style = TextStyle(fontSize = 20.sp)
+            color = SopkathonTheme.colors.black,
+            style = SopkathonTheme.typography.header.m_16
         )
     }
 }
@@ -52,7 +53,7 @@ fun TopBar(
 @Composable
 private fun TopBarPreview() {
     TopBar(
-        title = "Top Bar Title",
+        title = "안건 등록하기",
         onBackClick = {}
     )
 }

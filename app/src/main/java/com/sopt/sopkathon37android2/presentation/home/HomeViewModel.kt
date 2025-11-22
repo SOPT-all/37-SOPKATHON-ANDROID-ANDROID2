@@ -36,7 +36,9 @@ class HomeViewModel @Inject constructor(
     fun onAgendaClicked() {
         _uiState.update {
             it.copy(
-                selectedTab = HomeTab.ISSUE
+                selectedTab = HomeTab.ISSUE,
+                isVoteSelected = false,
+                isIssueSelected = true
             )
         }
     }
@@ -44,15 +46,9 @@ class HomeViewModel @Inject constructor(
     fun onVoteClicked() {
         _uiState.update {
             it.copy(
-                selectedTab = HomeTab.VOTE
-            )
-        }
-    }
-
-    fun onToggleClicked() {
-        _uiState.update {
-            it.copy(
-                isActivated = !it.isActivated
+                selectedTab = HomeTab.VOTE,
+                isVoteSelected = true,
+                isIssueSelected = false
             )
         }
     }

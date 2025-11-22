@@ -24,4 +24,9 @@ interface VoteService {
         @Path("issue_id") issueId: Long,
         @Body request: VoteRequestDto
     ): DummyBaseResponse<VoteResponseDto>
+  
+    @GET("/api/v1/issues/pass")
+    suspend fun getVoteListsService(
+        @Header("userId") userId: Long = 1
+    ): VoteBaseResponseDto<List<VoteResponseDto>>
 }
