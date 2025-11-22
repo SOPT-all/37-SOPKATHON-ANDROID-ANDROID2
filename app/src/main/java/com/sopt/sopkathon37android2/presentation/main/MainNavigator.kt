@@ -9,7 +9,7 @@ import com.sopt.sopkathon37android2.presentation.a.navigation.AScreen
 import com.sopt.sopkathon37android2.presentation.a.navigation.navigateToA
 import com.sopt.sopkathon37android2.presentation.b.navigation.navigateToB
 import com.sopt.sopkathon37android2.presentation.c.navigation.navigateToC
-import com.sopt.sopkathon37android2.presentation.d.navigation.navigateToD
+import com.sopt.sopkathon37android2.presentation.vote.navigation.navigateToD
 
 class MainNavigator(
     val navController: NavHostController,
