@@ -1,9 +1,9 @@
-package com.sopt.sopkathon37android2.presentation.a
+package com.sopt.sopkathon37android2.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.sopkathon37android2.data.service.DummyService
-import com.sopt.sopkathon37android2.presentation.a.model.HomeTab
+import com.sopt.sopkathon37android2.presentation.home.model.HomeTab
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,11 +13,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AViewModel @Inject constructor(
+class HomeViewModel @Inject constructor(
     private val dummyService: DummyService,
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(AState())
-    val uiState: StateFlow<AState> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow(HomeState())
+    val uiState: StateFlow<HomeState> = _uiState.asStateFlow()
 
     fun getDummy() {
         viewModelScope.launch {

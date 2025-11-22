@@ -1,4 +1,4 @@
-package com.sopt.sopkathon37android2.presentation.a
+package com.sopt.sopkathon37android2.presentation.home
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -17,17 +17,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.sopt.sopkathon37android2.presentation.a.model.HomeTab
+import com.sopt.sopkathon37android2.presentation.home.model.HomeTab
 
 @Composable
-fun ARoute(
+fun HomeRoute(
     paddingValues: PaddingValues,
     onNavigateToB: () -> Unit,
-    viewModel: AViewModel = hiltViewModel(),
+    viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    AScreen(
+    HomeScreen(
         uiState = uiState,
         paddingValues = paddingValues,
         onAgendaClick = viewModel::onAgendaClicked,
@@ -36,8 +36,8 @@ fun ARoute(
 }
 
 @Composable
-private fun AScreen(
-    uiState: AState,
+private fun HomeScreen(
+    uiState: HomeState,
     paddingValues: PaddingValues,
     onAgendaClick: () -> Unit,
     onVoteClick: () -> Unit,

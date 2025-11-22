@@ -1,4 +1,4 @@
-package com.sopt.sopkathon37android2.presentation.a.navigation
+package com.sopt.sopkathon37android2.presentation.home.navigation
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.navigation.NavController
@@ -6,19 +6,19 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.sopt.sopkathon37android2.core.navigation.Route
-import com.sopt.sopkathon37android2.presentation.a.ARoute
+import com.sopt.sopkathon37android2.presentation.home.HomeRoute
 import kotlinx.serialization.Serializable
 
-fun NavController.navigateToA(navOptions: NavOptions? = null) {
-    navigate(AScreen, navOptions)
+fun NavController.navigateToHome(navOptions: NavOptions? = null) {
+    navigate(Home, navOptions)
 }
 
-fun NavGraphBuilder.aGraph(
+fun NavGraphBuilder.homeGraph(
     paddingValues: PaddingValues,
     onNavigateToB: () -> Unit,
 ) {
-    composable<AScreen> {
-        ARoute(
+    composable<Home> {
+        HomeRoute(
             paddingValues = paddingValues,
             onNavigateToB = onNavigateToB,
         )
@@ -26,4 +26,4 @@ fun NavGraphBuilder.aGraph(
 }
 
 @Serializable
-data object AScreen : Route
+data object Home : Route
