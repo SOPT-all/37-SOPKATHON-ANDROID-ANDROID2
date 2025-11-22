@@ -7,18 +7,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.sopt.sopkathon37android2.core.designsystem.ui.theme.SopkathonTheme
 import com.sopt.sopkathon37android2.presentation.register.component.BodyTextField
 import com.sopt.sopkathon37android2.presentation.register.component.DateRangePickerField
@@ -29,6 +23,7 @@ import com.sopt.sopkathon37android2.presentation.register.component.TextFieldSem
 import com.sopt.sopkathon37android2.presentation.register.component.TextFieldTitle
 import com.sopt.sopkathon37android2.presentation.register.component.TitleTextField
 import com.sopt.sopkathon37android2.presentation.register.component.TopBar
+import com.sopt.sopkathon37android2.presentation.register.navigation.RegisterState
 
 @Composable
 fun RegisterRoute(
@@ -37,34 +32,48 @@ fun RegisterRoute(
     viewModel: RegisterViewModel = hiltViewModel(),
 ) {
 
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
     RegisterScreen(
+        uiState = uiState,
         paddingValues = paddingValues,
         onNavigateToHome = onNavigateToHome,
+        onRegisterButtonClick = viewModel::onRegisterButtonClicked,
+        onTextValueChange = { text ->
+            viewModel.updateText(text)
+        },
+        onContentValueChange = { content ->
+            viewModel.updateContent(content)
+        },
+        onSelect = { index ->
+            viewModel.updateSelectedIndex(index)
+        }
+
     )
 }
 
 @Composable
 private fun RegisterScreen(
+    uiState: RegisterState,
     paddingValues: PaddingValues,
     onNavigateToHome: () -> Unit,
+    onRegisterButtonClick: () -> Unit,
+    onTextValueChange: (String) -> Unit,
+    onContentValueChange: (String) -> Unit,
+    onSelect: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    var selectedIndex by remember { mutableIntStateOf(-1) }
-    var title by remember { mutableStateOf("") }
-    var body by remember { mutableStateOf("") }
-
     Column(
-        modifier = Modifier
+        modifier = modifier
             .padding(paddingValues = paddingValues)
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
             .background(SopkathonTheme.colors.gray01)
             .padding(horizontal = 16.dp)
             .padding(top = 16.dp)
     ) {
         TopBar(
             title = "안건 등록하기",
-            onBackClick = {}
+            onBackClick = onNavigateToHome
         )
 
         Spacer(Modifier.height(10.dp))
@@ -76,8 +85,8 @@ private fun RegisterScreen(
         Spacer(Modifier.height(8.dp))
 
         TitleTextField(
-            value = title,
-            onValueChange = { title = it },
+            value = uiState.title,
+            onValueChange = onTextValueChange,
             placeholder = "제목을 입력하세요"
         )
 
@@ -90,8 +99,8 @@ private fun RegisterScreen(
         Spacer(Modifier.height(8.dp))
 
         BodyTextField(
-            value = body,
-            onValueChange = { body = it },
+            value = uiState.content,
+            onValueChange = onContentValueChange,
             placeholder = "안건에 대해 설명해주세요\n" +
                     "투표 대상 : 투표에 참여할 수 있는 대상을 입력해주세요\n" +
                     "한줄 요약: 안건에 대해 한 줄로 요약해주세요\n" +
@@ -112,8 +121,8 @@ private fun RegisterScreen(
 
         SelectableChipRow(
             chips = listOf("학교 전체", "단과대", "학과"),
-            selectedIndex = selectedIndex,
-            onSelect = { index -> selectedIndex = index }
+            selectedIndex = uiState.selectedIndex,
+            onSelect = onSelect
         )
 
         Spacer(Modifier.height(32.dp))
@@ -133,24 +142,8 @@ private fun RegisterScreen(
 
         RegisterButton(
             text = "안건 등록하기",
-            enabled = title.isNotBlank()
-                    && body.isNotBlank()
-                    && selectedIndex != -1,
-            onClick = {}
-        )
-    }
-}
-
-
-@Preview(
-    showBackground = true,
-)
-@Composable
-private fun HomeScreenPreview() {
-    SopkathonTheme() {
-        RegisterScreen(
-            paddingValues = PaddingValues(),
-            onNavigateToHome = {}
+            enabled = uiState.isButtonEnabled,
+            onClick = onRegisterButtonClick
         )
     }
 }
