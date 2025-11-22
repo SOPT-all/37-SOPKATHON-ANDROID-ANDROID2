@@ -28,6 +28,7 @@ import com.sopt.sopkathon37android2.presentation.home.component.TagType
 
 @Composable
 fun HomeIssueCard(
+    issueId: Long,
     tag: String,
     tagType: TagType,
     dDay: String,
@@ -35,7 +36,7 @@ fun HomeIssueCard(
     author: String,
     boomUpCount: String,
     isBoomUpFilled: Boolean = false,
-    onBoomUpClick: () -> Unit = {},
+    onBoomUpClick: (Long) -> Unit = {},
     onItemClick: () -> Unit = {}
 ) {
     // 제목: 18자 제한
@@ -112,7 +113,7 @@ fun HomeIssueCard(
             BoomUpButton(
                 count = boomUpCount,
                 isFilled = isBoomUpFilled,
-                onClick = onBoomUpClick,
+                onClick = { onBoomUpClick(issueId) },
                 enabled = !isBoomUpFilled // filled 상태면 클릭 불가
             )
         }
@@ -134,9 +135,9 @@ private fun BoomUpButton(
         Image(
             painter = painterResource(
                 id = if (isFilled) {
-                    R.drawable.ic_home_boomup
-                } else {
                     R.drawable.ic_home_boomup_empty
+                } else {
+                    R.drawable.ic_home_boomup
                 }
             ),
             contentDescription = "추천",
@@ -148,33 +149,5 @@ private fun BoomUpButton(
             style = SopkathonTheme.typography.caption.sb_12,
             color = SopkathonTheme.colors.gray05
         )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun HomeIssueCardPreview() {
-    SopkathonTheme {
-        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            HomeIssueCard(
-                tag = "전체",
-                tagType = TagType.ALL,
-                dDay = "D-3",
-                title = "학관에 쓰레기통 설치해주세요",
-                author = "심리학과 학생",
-                boomUpCount = "1.5천",
-                isBoomUpFilled = false
-            )
-
-            HomeIssueCard(
-                tag = "미술대학",
-                tagType = TagType.MY,
-                dDay = "D-2",
-                title = "집가서자고싶다집가서자고싶다집가서자고싶다",
-                author = "집보내줘집보내줘집보내줘집보내줘",
-                boomUpCount = "1.5천",
-                isBoomUpFilled = true
-            )
-        }
     }
 }

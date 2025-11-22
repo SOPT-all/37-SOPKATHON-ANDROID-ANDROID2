@@ -14,7 +14,7 @@ interface IssueScreenService {
 
     @GET("/api/v1/issues")
     suspend fun getIssues(
-        @Header("userId") userId: Long,
+        @Header("userId") userId: Long=1,
         @Header("Content-Type") contentType: String = "application/json",
         @Query("range") range: String = "all",
         @Query("order") order: String = "recommend"

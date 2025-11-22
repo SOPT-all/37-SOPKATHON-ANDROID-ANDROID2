@@ -13,9 +13,12 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.sopkathon37android2.R
 import com.sopt.sopkathon37android2.core.designsystem.ui.theme.SopkathonTheme
 import com.sopt.sopkathon37android2.presentation.home.component.HomeBanner
@@ -23,16 +26,31 @@ import com.sopt.sopkathon37android2.presentation.home.component.HomeToggle
 import com.sopt.sopkathon37android2.presentation.home.component.HomeVoteCard
 import com.sopt.sopkathon37android2.presentation.home.component.TagType
 
+//@Composable
+//fun IssueRoute(
+//    viewModel: IssueViewModel = hiltViewModel(),
+//    onIssueCardClick: (String) -> Unit = {},
+//) {
+//    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+//
+//    IssueScreen(
+//        uiState = uiState,
+//        onBoomUpClick = { issueId ->
+//            viewModel.postRecommend(issueId.toLong())
+//        },
+//        onIssueCardClick = onIssueCardClick,
+//        onToggleClick = { viewModel.onToggleClicked() }
+//    )
+//}
+
 @Composable
 fun IssueScreen(
     uiState: IssueState,
-    onClick: () -> Unit = {},
-    onBoomUpCardClick: () -> Unit = {},
-    onIssueCardClick: (String) -> Unit = {},
-    onBoomUpClick: (String) -> Unit = {},
-    onToggleClick: () -> Unit = {},
-    onSortClick: () -> Unit = {},
-    onFloatingButtonClick: () -> Unit = {}
+   // onBoomUpCardClick: () -> Unit,
+    onIssueCardClick: (String) -> Unit,
+    onBoomUpClick: (Long) -> Unit,
+    onToggleClick: () -> Unit,
+
 ) {
     LazyColumn(
         modifier = Modifier
@@ -62,8 +80,8 @@ fun IssueScreen(
                     author = "컴퓨터공학과 학생회장",
                     currentCount = 25,
                     maxCount = 50,
-                    progressText = "투표 가능까지 1명 남았어요",
-                    onItemClick = onBoomUpCardClick
+                    progressText = "투표 가능까onBoomUpCardClick지 1명 남았어요",
+                    onItemClick = {  }
                 )
             }
 
@@ -106,6 +124,7 @@ fun IssueScreen(
 
         items(uiState.issueList) { issue ->
             HomeIssueCard(
+                issueId = issue.id,
                 tag = issue.tag,
                 tagType = issue.tagType,
                 dDay = issue.dDay,
@@ -114,7 +133,7 @@ fun IssueScreen(
                 boomUpCount = issue.boomUpCount,
                 isBoomUpFilled = issue.isBoomUpFilled,
                 onBoomUpClick = { onBoomUpClick(issue.id) },
-                onItemClick = { onIssueCardClick(issue.id) },
+                onItemClick = { onIssueCardClick(issue.id.toString()) },
             )
         }
     }
