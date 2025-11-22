@@ -21,7 +21,7 @@ enum class TagType {
 }
 
 @Composable
-fun SchoolInfoTag(
+fun HomeTagChip(
     text: String,
     type: TagType = TagType.OTHER
 ) {
@@ -31,14 +31,12 @@ fun SchoolInfoTag(
             TagType.MY -> SopkathonTheme.colors.tagMy
             TagType.OTHER -> SopkathonTheme.colors.tagOther
         },
-        shape = RoundedCornerShape(99.dp),
-        modifier = Modifier.height(21.dp)
+        shape = RoundedCornerShape(99.dp)
     ) {
         Text(
             text = text,
-            fontSize = 10.sp,
-            fontWeight = FontWeight.Medium,
-            color = SopkathonTheme.colors.black,
+            style = SopkathonTheme.typography.caption.m_10,
+            color = SopkathonTheme.colors.gray05,
             modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
         )
     }
@@ -50,8 +48,8 @@ private fun HomeTagChipPreview()
 {
     Column()
     {
-        SchoolInfoTag(text = "전체", type = TagType.ALL)
-        SchoolInfoTag(text = "미술대학", type = TagType.MY)
-        SchoolInfoTag(text = "공과대학", type = TagType.OTHER)
+        HomeTagChip(text = "전체", type = TagType.ALL)
+        HomeTagChip(text = "미술대학", type = TagType.MY)
+        HomeTagChip(text = "공과대학", type = TagType.OTHER)
     }
 }
