@@ -1,34 +1,49 @@
-package com.example.sopkathon37android2.ui.theme
+package com.sopt.sopkathon37android2.core.designsystem.ui.theme
 
 import androidx.compose.runtime.Immutable
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.Color
 
 val White = Color(0xFFFFFFFF)
-val Gray100 = Color(0xFFF4F4F4)
-val Gray200 = Color(0xFFDADADA)
-val Gray300 = Color(0xFF949494)
-val Gray400 = Color(0xFF767676)
-val Gray600 = Color(0xFF6A6A6A)
-val Gray900 = Color(0xFF141414)
-val Black = Color(0xFF000000)
-val Black_50 = Color(0xFF000000).copy(alpha = 0.5f)
 
-val BrandRed = Color(0xFFDF080D)
+val Gray01 = Color(0xFFF8F9FB)
+val Gray02 = Color(0xFFE4E8F2)
+val Gray03 = Color(0xFFC3C7D1)
+val Gray04 = Color(0xFF687393)
+val Gray05 = Color(0xFF3F475B)
+
+val Black = Color(0xFF000000)
+
+val DisArg01 = Color(0xFFFF4F93)
+val Arg01 = Color(0xFF1C6EE9)
+
+val KeyLight = Color(0xFFFFC0D9)
+val KeyDark = Color(0xFFFF78B0)
+
+val TagAll = Color(0xFFADC4FF)
+val TagMy = Color(0xFFD1DEFF)
+val TagOther = Color(0xFFE4E8F2)
 
 @Immutable
 data class Colors(
     val white: Color = White,
     val black: Color = Black,
 
-    val brandRed: Color = BrandRed,
+    val gray01: Color = Gray01,
+    val gray02: Color = Gray02,
+    val gray03: Color = Gray03,
+    val gray04: Color = Gray04,
+    val gray05: Color = Gray05,
 
-    val gray100: Color = Gray100,
-    val gray200: Color = Gray200,
-    val gray300: Color = Gray300,
-    val gray400: Color = Gray400,
-    val gray600: Color = Gray600,
-    val gray900: Color = Gray900,
-    val black50: Color = Black_50,
+    val disArg01: Color = DisArg01,
+    val arg01: Color = Arg01,
+
+    val keyLight: Color = KeyLight,
+    val keyDark: Color = KeyDark,
+
+    val tagAll: Color = TagAll,
+    val tagMy: Color = TagMy,
+    val tagOther: Color = TagOther
 )
 
 val defaultColors = Colors()

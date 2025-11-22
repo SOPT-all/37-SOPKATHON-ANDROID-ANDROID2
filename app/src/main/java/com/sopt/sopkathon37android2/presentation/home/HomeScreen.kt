@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.sopt.sopkathon37android2.presentation.home.component.HomeToggle
 import com.sopt.sopkathon37android2.presentation.home.model.HomeTab
 
 @Composable
@@ -34,7 +35,8 @@ fun HomeRoute(
         onAgendaClick = viewModel::onAgendaClicked,
         onVoteClick = viewModel::onVoteClicked,
         onClick = onNavigateToRegister,
-        onVoteScreenClick = onNavigateToVote
+        onVoteScreenClick = onNavigateToVote,
+        onToggleClick = viewModel::onToggleClicked
     )
 }
 
@@ -46,6 +48,7 @@ private fun HomeScreen(
     onVoteClick: () -> Unit,
     onClick: () -> Unit,
     onVoteScreenClick: () -> Unit,
+    onToggleClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val textColor = if (uiState.isSelected) {
@@ -85,7 +88,9 @@ private fun HomeScreen(
         when (uiState.selectedTab) {
             HomeTab.ISSUE -> {
                 IssueScreen(
-                    onClick = onClick
+                    uiState = uiState,
+                    onClick = onClick,
+                    onToggleClick = onToggleClick
                 )
             }
 
@@ -100,12 +105,19 @@ private fun HomeScreen(
 
 @Composable
 private fun IssueScreen(
-    onClick: () -> Unit
+    uiState: HomeState,
+    onClick: () -> Unit,
+    onToggleClick: () -> Unit
 ){
     Column {
         Text(
             text = "zzz",
             modifier = Modifier.clickable(onClick = onClick)
+        )
+
+        HomeToggle(
+            isActivated = uiState.isActivated,
+            onToggleClick = onToggleClick
         )
     }
 }

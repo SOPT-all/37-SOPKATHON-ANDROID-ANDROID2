@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.example.sopkathon37android2.ui.theme.SopkathonTheme
+import com.sopt.sopkathon37android2.core.designsystem.ui.theme.SopkathonTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
