@@ -48,4 +48,12 @@ class HomeViewModel @Inject constructor(
             )
         }
     }
+
+    fun onToggleClicked() {
+        _uiState.update {
+            it.copy(
+                isActivated = !it.isActivated
+            )
+        }
+    }
 }

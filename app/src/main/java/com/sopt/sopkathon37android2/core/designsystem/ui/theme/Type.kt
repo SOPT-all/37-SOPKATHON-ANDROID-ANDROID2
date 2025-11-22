@@ -1,4 +1,4 @@
-package com.example.sopkathon37android2.ui.theme
+package com.sopt.sopkathon37android2.core.designsystem.ui.theme
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.text.TextStyle
