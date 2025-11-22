@@ -4,7 +4,6 @@ import com.sopt.sopkathon37android2.data.dto.base.DummyBaseResponse
 import com.sopt.sopkathon37android2.data.dto.request.VoteRequestDto
 import com.sopt.sopkathon37android2.data.dto.response.VoteResponseDto
 import com.sopt.sopkathon37android2.data.dto.response.VotedPageData
-import com.sopt.sopkathon37android2.data.dto.response.VotedPageResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header

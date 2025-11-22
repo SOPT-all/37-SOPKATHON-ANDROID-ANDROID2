@@ -1,6 +1,5 @@
 package com.sopt.sopkathon37android2.presentation.vote
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.sopkathon37android2.data.dto.request.VoteRequestDto
