@@ -7,10 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.navOptions
-import com.sopt.sopkathon37android2.presentation.a.navigation.aGraph
-import com.sopt.sopkathon37android2.presentation.b.navigation.bGraph
-import com.sopt.sopkathon37android2.presentation.c.navigation.cGraph
-import com.sopt.sopkathon37android2.presentation.d.navigation.dGraph
+import com.sopt.sopkathon37android2.presentation.register.navigation.registerGraph
+import com.sopt.sopkathon37android2.presentation.home.navigation.homeGraph
+import com.sopt.sopkathon37android2.presentation.vote.navigation.voteGraph
 
 @Composable
 fun MainNavHost(
@@ -40,23 +39,20 @@ fun MainNavHost(
         startDestination = navigator.startDestination,
         modifier = modifier,
     ) {
-        aGraph(
+        homeGraph(
             paddingValues = paddingValues,
-            onNavigateToB = { navigator.navigateToB(keepStackNavOptions) },
+            onNavigateToRegister = { navigator.navigateToRegister(keepStackNavOptions) },
+            onNavigateToVote = { navigator.navigateToVote(keepStackNavOptions) },
         )
 
-        bGraph(
+        registerGraph(
             paddingValues = paddingValues,
-            onNavigateToC = { navigator.navigateToC(keepStackNavOptions) },
+            onNavigateUp = { navigator.navigateUp() },
         )
 
-        cGraph(
+        voteGraph(
             paddingValues = paddingValues,
-            onNavigateToD = { navigator.navigateToD(keepStackNavOptions) },
-        )
-
-        dGraph(
-            paddingValues = paddingValues,
+            onNavigateUp = { navigator.navigateUp() },
         )
     }
 }
