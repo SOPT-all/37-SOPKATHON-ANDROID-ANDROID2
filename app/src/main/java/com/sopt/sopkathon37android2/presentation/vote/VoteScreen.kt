@@ -18,6 +18,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -44,6 +45,9 @@ fun VoteRoute(
     viewModel: VoteViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    LaunchedEffect(Unit) {
+        viewModel.getVote(viewModel.issueId, viewModel.userId)
+    }
 
     VoteScreen(
         uiState = uiState,
@@ -179,8 +183,8 @@ private fun VoteScreen(
                 ){
                     VoteResult(
                         maxVoter = uiState.maxVoter,
-                        currentVoter = if (uiState.isAgreed!!) uiState.agreeVoter else uiState.disagreeVoter,
-                        isAgreed = uiState.isAgreed
+                        currentVoter = if (uiState.isAgreed ?: false) uiState.agreeVoter else uiState.disagreeVoter,
+                        isAgreed = uiState.isAgreed ?: false
                     )
                     Spacer(modifier = Modifier.height(20.dp))
                     Row(
@@ -190,10 +194,10 @@ private fun VoteScreen(
                             .fillMaxWidth()
                     ) {
                         VoteAgreeButton(
-                            isEnabled = uiState.isAgreed
+                            isEnabled = uiState.isAgreed ?: false
                         )
                         VoteDisagreeButton(
-                            isEnabled = uiState.isAgreed.not()
+                            isEnabled = uiState.isAgreed?.not() ?: false
                         )
                     }
                     Spacer(modifier = Modifier.height(12.dp))
