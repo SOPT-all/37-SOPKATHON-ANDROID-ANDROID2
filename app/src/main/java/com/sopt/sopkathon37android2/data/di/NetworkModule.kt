@@ -2,6 +2,7 @@ package com.sopt.sopkathon37android2.data.di
 
 import com.example.sopkathon37android2.BuildConfig
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.sopt.sopkathon37android2.data.service.RecommendService
 import com.sopt.sopkathon37android2.data.service.RegisterService
 import dagger.Module
 import dagger.Provides
@@ -59,4 +60,9 @@ object NetworkModule {
     @Singleton
     fun provideRegisterService(retrofit: Retrofit): RegisterService =
         retrofit.create(RegisterService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideRecommendService(retrofit: Retrofit): RecommendService =
+        retrofit.create(RecommendService::class.java)
 }
