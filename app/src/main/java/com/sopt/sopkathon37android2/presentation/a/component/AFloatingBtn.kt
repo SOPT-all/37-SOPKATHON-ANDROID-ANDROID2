@@ -23,7 +23,7 @@ fun AFloatingBtn(onClick: () -> Unit) {
 fun AFloatingBtnPreview()
 {
 
-    AFloatingBt 
+    AFloatingBtn{
     }
 
 }
