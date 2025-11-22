@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -79,6 +80,7 @@ private fun VoteScreen(
                 .padding(horizontal = 14.dp, vertical = 16.dp)
         ) {
             Row(
+                verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
@@ -87,7 +89,10 @@ private fun VoteScreen(
                     color = SopkathonTheme.colors.black,
                     style = SopkathonTheme.typography.title.sb_16
                 )
-                VoteStage()
+                Spacer(modifier = Modifier.width(8.dp))
+                VoteStage(
+                    text = uiState.stage,
+                )
                 Spacer(modifier = Modifier.weight(1f))
                 Text(
                     text = uiState.writer,
