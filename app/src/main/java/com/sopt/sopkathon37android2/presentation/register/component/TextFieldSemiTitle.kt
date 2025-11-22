@@ -8,14 +8,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.sopt.sopkathon37android2.core.designsystem.ui.theme.SopkathonTheme
 
 @Composable
-fun TextFieldTitle(
+fun TextFieldSemiTitle(
     text: String,
     modifier: Modifier = Modifier
 ) {
     Text(
         text = text,
-        style = SopkathonTheme.typography.body.m_14,
-        color = SopkathonTheme.colors.gray05,
+        style = SopkathonTheme.typography.caption.m_10,
+        color = SopkathonTheme.colors.gray03,
         modifier = modifier
             .fillMaxWidth()
     )
@@ -23,8 +23,8 @@ fun TextFieldTitle(
 
 @Preview(showBackground = true)
 @Composable
-private fun TextFieldTitlePreview() {
-    TextFieldTitle(
-        text = "제목"
+private fun TextFieldSemiTitlePreview() {
+    TextFieldSemiTitle(
+        text = "투표 기간은 등록일로부터 3주입니다"
     )
 }

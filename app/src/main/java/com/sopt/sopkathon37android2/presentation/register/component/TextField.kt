@@ -2,10 +2,10 @@ package com.sopt.sopkathon37android2.presentation.register.component
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.relocation.BringIntoViewRequester
-import androidx.compose.foundation.relocation.bringIntoViewRequester
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
@@ -19,74 +19,94 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.onFocusChanged
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.sopt.sopkathon37android2.core.designsystem.ui.theme.SopkathonTheme
 
 @Composable
-fun TextField(
+fun TitleTextField(
     value: String,
     onValueChange: (String) -> Unit,
-    modifier: Modifier = Modifier,
-    isEnabled: Boolean = true,
     placeholder: String = "",
-    onFocusChanged: ((Boolean) -> Unit)? = null
-){
-    val scrollState = rememberScrollState()
-    val focusState = remember { mutableStateOf(false) }
-    val textFieldRequester = remember { BringIntoViewRequester() }
+    modifier: Modifier = Modifier
+) {
+    val isFocused = remember { mutableStateOf(false) }
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
-    val lastLineBottom = remember { mutableStateOf(0) }
+
+    BasicTextField(
+        value = value,
+        onValueChange = onValueChange,
+        singleLine = true,
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(4.dp))
+            .border(1.dp, SopkathonTheme.colors.gray02, RoundedCornerShape(4.dp))
+            .padding(horizontal = 16.dp, vertical = 12.dp)
+            .onFocusChanged { isFocused.value = it.isFocused },
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Text,
+            imeAction = ImeAction.Done
+        ),
+        keyboardActions = KeyboardActions(onDone = {
+            keyboardController?.hide()
+            focusManager.clearFocus()
+        }),
+        decorationBox = { innerTextField ->
+            if (value.isEmpty() && !isFocused.value) {
+                Text(
+                    text = placeholder,
+                    style= SopkathonTheme.typography.body.m_13,
+                    color = SopkathonTheme.colors.gray03
+                )
+            }
+            innerTextField()
+        }
+    )
+}
+
+@Composable
+fun BodyTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    placeholder: String = "",
+    modifier: Modifier = Modifier
+) {
+    val isFocused = remember { mutableStateOf(false) }
+    val scrollState = rememberScrollState()
 
     Column(
         modifier = modifier
-            .fillMaxSize()
-            .clip(RoundedCornerShape(12.dp))
-            .border(width = 1.dp, color = Color.White, shape = RoundedCornerShape(12.dp))
-            .bringIntoViewRequester(textFieldRequester)
+            .fillMaxWidth()
+            .heightIn(min = 130.dp, max = 300.dp) 
+            .clip(RoundedCornerShape(4.dp))
+            .border(1.dp, SopkathonTheme.colors.gray02, RoundedCornerShape(8.dp))
+            .padding(horizontal = 16.dp, vertical = 12.dp)
     ) {
         BasicTextField(
             value = value,
             onValueChange = onValueChange,
             modifier = Modifier
-                .fillMaxSize()
-                .height(275.dp)
+                .fillMaxWidth()
                 .verticalScroll(scrollState)
-                .onFocusChanged { focusStateChanged ->
-                    focusState.value = focusStateChanged.isFocused
-                    onFocusChanged?.invoke(focusStateChanged.isFocused)
-                },
-            enabled = isEnabled,
-//        textStyle = ByeBooTheme.typography.body3.copy(
-//            color = ByeBooTheme.colors.white
-//        ),
+                .onFocusChanged { isFocused.value = it.isFocused },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Text,
-                imeAction = ImeAction.Done
+                imeAction = ImeAction.Default
             ),
-            keyboardActions = KeyboardActions(onDone = {
-                keyboardController?.hide()
-                focusManager.clearFocus()
-            }),
-            // cursorBrush = SolidColor(ByeBooTheme.colors.white),
             decorationBox = { innerTextField ->
-                if (value.isEmpty() && !(focusState.value)) {
+                if (value.isEmpty() && !isFocused.value) {
                     Text(
                         text = placeholder,
-//                    color = ByeBooTheme.colors.gray300,
-//                    style = ByeBooTheme.typography.body3
+                        style = SopkathonTheme.typography.body.m_13,
+                        color = SopkathonTheme.colors.gray03
                     )
                 }
                 innerTextField()
-            },
-            onTextLayout = { layoutResult ->
-                lastLineBottom.value =
-                    layoutResult.getLineBottom(layoutResult.lineCount - 1).toInt()
             }
         )
     }
@@ -95,9 +115,22 @@ fun TextField(
 @Preview(showBackground = true)
 @Composable
 private fun TextFieldPreview() {
-    TextField(
-        value = "",
-        onValueChange = {},
-        placeholder = "텍스트를 입력해주세요."
-    )
+    Column(modifier = Modifier.padding(16.dp)) {
+        TitleTextField(
+            value = "",
+            onValueChange = {},
+            placeholder = "제목을 입력해주세요."
+        )
+
+        Column(modifier = Modifier.height(20.dp)) {}
+
+        BodyTextField(
+            value = "",
+            onValueChange = {},
+            placeholder = "안건에 대해 설명해주세요\n" +
+                    "투표 대상 : 투표에 참여할 수 있는 대상을 입력해주세요\n" +
+                    "한줄 요약: 안건에 대해 한 줄로 요약해주세요\n" +
+                    "상세 설명: 안건에 대해 상세히 설명해주세요 (제의 배경, 안건 내용, 근거 등)"
+        )
+    }
 }
