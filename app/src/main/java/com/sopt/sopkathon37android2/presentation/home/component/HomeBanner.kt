@@ -18,7 +18,6 @@ fun HomeBanner(
     @DrawableRes bannerImage: Int,
     modifier: Modifier = Modifier
 ) {
-
     Image(
         painter = painterResource(id = bannerImage),
         contentDescription = null,

@@ -1,11 +1,14 @@
 package com.sopt.sopkathon37android2.presentation.home
 
+import HomeIssueCard
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -25,6 +28,12 @@ import com.sopt.sopkathon37android2.presentation.home.component.HomeVote
 import com.sopt.sopkathon37android2.presentation.home.model.HomeTab
 import com.sopt.sopkathon37android2.presentation.home.model.VoteUiModel
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.FabPosition
+import androidx.compose.material3.Scaffold
+import androidx.compose.ui.Alignment
+import com.sopt.sopkathon37android2.presentation.home.component.HomeFloatingButton
+import com.sopt.sopkathon37android2.presentation.home.component.HomeVoteCard
+import com.sopt.sopkathon37android2.presentation.home.component.TagType
 
 @Composable
 fun HomeRoute(
@@ -92,23 +101,112 @@ private fun HomeScreen(
 }
 
 @Composable
-private fun IssueScreen(
+fun IssueScreen(
     uiState: HomeState,
-    onClick: () -> Unit,
-    onToggleClick: () -> Unit
+    onClick: () -> Unit = {},
+    onBoomUpCardClick: () -> Unit = {},
+    onIssueCardClick: (String) -> Unit = {},
+    onBoomUpClick: (String) -> Unit = {},
+    onToggleClick: () -> Unit = {},
+    onSortClick: () -> Unit = {},
+    onFloatingButtonClick: () -> Unit = {}
 ) {
-    Column {
-        Text(
-            text = "zzz",
-            modifier = Modifier.clickable(onClick = onClick)
-        )
+    Scaffold(
+        containerColor = SopkathonTheme.colors.gray01,
+        floatingActionButton = {
+            HomeFloatingButton(onClick = onFloatingButtonClick)
+        },
+        floatingActionButtonPosition = FabPosition.Center,
+    ) { paddingValues ->
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            // 1. 개선사항 안내 배너
+            item {
+                HomeBanner(
+                    bannerImage = R.drawable.img_issue_banner, // 실제 배너 이미지 리소스
+                    modifier = Modifier.padding()
+                )
+            }
 
-        HomeToggle(
-            isActivated = uiState.isActivated,
-            onToggleClick = onToggleClick
-        )
+            // 2. 인기 안건 섹션
+            item {
+                Column(
+                    modifier = Modifier.padding(),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Text(
+                        text = "🔥 실시간 인기 안건",
+                        style = SopkathonTheme.typography.title.sb_16,
+                        color = SopkathonTheme.colors.gray05
+                    )
+
+                    HomeVoteCard(
+                        tag = "전체",
+                        tagType = TagType.ALL,
+                        dDay = "D-1",
+                        title = "F동 건물에 엘리베이터 설치 해주세요",
+                        author = "컴퓨터공학과 학생회장",
+                        currentCount = 25,
+                        maxCount = 50,
+                        progressText = "투표 가능까지 1명 남았어요",
+                        onItemClick = onBoomUpCardClick
+                    )
+                }
+            }
+
+            // 3. 필터링 영역
+            item {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        HomeToggle(
+                            isActivated = uiState.isActivated,
+                            onToggleClick = onToggleClick
+                        )
+
+                        Text(
+                            text = "타 단과대 제외",
+                            style = SopkathonTheme.typography.body.m_14,
+                            color = SopkathonTheme.colors.gray05,
+                            modifier = Modifier.padding(start = 8.dp)
+                        )
+                    }
+
+                    Text(
+                        text = "추천순 ▼",
+                        style = SopkathonTheme.typography.body.m_14,
+                        color = SopkathonTheme.colors.gray04
+                    )
+                }
+            }
+
+
+            items(uiState.issueList) { issue ->
+                HomeIssueCard(
+                    tag = issue.tag,
+                    tagType = issue.tagType,
+                    dDay = issue.dDay,
+                    title = issue.title,
+                    author = issue.author,
+                    boomUpCount = issue.boomUpCount,
+                    isBoomUpFilled = issue.isBoomUpFilled,
+                    onBoomUpClick = { onBoomUpClick(issue.id) },
+                    onItemClick = { onIssueCardClick(issue.id) },
+                )
+            }
+        }
     }
-
 }
 
 @Composable
