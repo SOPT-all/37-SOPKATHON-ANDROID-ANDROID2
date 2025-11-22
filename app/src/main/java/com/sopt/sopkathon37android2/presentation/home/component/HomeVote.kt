@@ -26,28 +26,27 @@ import com.sopt.sopkathon37android2.core.designsystem.ui.theme.SopkathonTheme
 
 @Composable
 fun HomeVote(
-    detailGroupTag: String,
-    tagType: TagType,
-    studentCouncil: Boolean,
-    voteTotalNumber: Int,
-    detailTitle: String,
-    detailGroup: String,
+    range: String,
+    isCouncil: Boolean,
+    votedCount: Int,
+    title: String,
+    department: String,
     onVoteClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val displayedTitleText = remember(detailTitle) {
-        if (detailTitle.length > 18){
-            detailTitle.take(18) + "…"
+    val displayedTitleText = remember(title) {
+        if (title.length > 18){
+            title.take(18) + "…"
         } else {
-            detailTitle
+            title
         }
     }
 
-    val displayedDetailGroupText = remember(detailGroup) {
-        if (detailGroup.length > 20) {
-            detailGroup.take(20) + "…"
+    val displayedDetailGroupText = remember(department) {
+        if (department.length > 20) {
+            department.take(20) + "…"
         } else {
-            detailGroup
+            department
         }
     }
 
@@ -63,12 +62,12 @@ fun HomeVote(
         Row(
             modifier = Modifier.fillMaxWidth()
         ) {
-            HomeTagChip(
-                text = detailGroupTag,
-                type = tagType
+            VoteTagChip(
+                text = department,
+                type = range
             )
 
-            if (studentCouncil) {
+            if (isCouncil) {
                 Spacer(modifier = Modifier.weight(1f))
 
                 Icon(
@@ -109,7 +108,7 @@ fun HomeVote(
             )
 
             Text(
-                text = "${voteTotalNumber}명이 투표했어요",
+                text = "${votedCount}명이 투표했어요",
                 color = SopkathonTheme.colors.black,
                 style = SopkathonTheme.typography.caption.m_12
             )
