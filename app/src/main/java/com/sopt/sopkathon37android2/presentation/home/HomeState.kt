@@ -8,20 +8,6 @@ data class HomeState(
     val userId: Long = 0,
     val nickname: String = "",
     val selectedTab: HomeTab = HomeTab.ISSUE,
-    val isActivated: Boolean = false,
     val isIssueSelected: Boolean = true,
     val isVoteSelected: Boolean = false,
-    val voteList : List<VoteUiModel> = emptyList(),
-    val issueList: List<IssueItem> = emptyList()
-)
-
-data class IssueItem(
-    val id: String,
-    val tag: String,
-    val tagType: TagType,
-    val dDay: String,
-    val title: String,
-    val author: String,
-    val boomUpCount: String,
-    val isBoomUpFilled: Boolean
 )

@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.navOptions
+import com.sopt.sopkathon37android2.presentation.home.HomeViewModel
 import com.sopt.sopkathon37android2.presentation.register.navigation.registerGraph
 import com.sopt.sopkathon37android2.presentation.home.navigation.homeGraph
 import com.sopt.sopkathon37android2.presentation.vote.navigation.voteGraph
@@ -15,6 +16,7 @@ import com.sopt.sopkathon37android2.presentation.vote.navigation.voteGraph
 fun MainNavHost(
     navigator: MainNavigator,
     paddingValues: PaddingValues,
+    homeViewModel: HomeViewModel,
     modifier: Modifier = Modifier,
 ) {
     val clearStackNavOptions =
@@ -41,6 +43,7 @@ fun MainNavHost(
     ) {
         homeGraph(
             paddingValues = paddingValues,
+            homeViewModel = homeViewModel,
             onNavigateToRegister = { navigator.navigateToRegister(keepStackNavOptions) },
             onNavigateToVote = { navigator.navigateToVote(keepStackNavOptions) },
         )
