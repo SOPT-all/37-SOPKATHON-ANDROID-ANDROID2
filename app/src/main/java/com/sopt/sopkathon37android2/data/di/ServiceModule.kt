@@ -20,6 +20,10 @@ object ServiceModule {
 
     @Provides
     @Singleton
+    fun provideVoteService(retrofit: Retrofit): VoteService = retrofit.create(VoteService::class.java)
+    
+    @Provides
+    @Singleton
     fun getVoteListsService(retrofit: Retrofit): VoteService = retrofit.create(VoteService::class.java)
     // IssueService
     @Provides
